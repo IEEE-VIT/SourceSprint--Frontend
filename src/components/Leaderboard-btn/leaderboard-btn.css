@@ -1,0 +1,24 @@
+.leaderboard-btn {
+  background: var(--bg-glass-card);
+  border: var(--border-gold);
+  border-radius: 6px;
+  padding: 10px 18px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-btn:hover {
+  background: rgba(212, 136, 59, 0.15);
+  border: var(--border-gold-hover);
+  box-shadow: var(--glow-gold-hover);
+  transform: translateY(-2px);
+}
+
+.leaderboard-btn:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,26 @@
+.instructions-container{
+    text-align: center;
+    margin: 10vh 20vw;
+    /* height: 100vh; */
+}
+.instruction-set, .instruction-text{
+    text-align: left;
+}
+.instructions-heading-hr{
+    height: 0px;
+    border: 1px solid #8C2E13;
+    width: 230px;
+    margin-bottom: 20px;
+}
+.instructions-heading-text h1{
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+
+}
+
+/* Mobile devices */
+@media(max-width: 640px){
+    .instructions-container{
+        margin: 10vh 10vw;
+    }
+}

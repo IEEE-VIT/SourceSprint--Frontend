@@ -1,0 +1,25 @@
+{
+  "short_name": "CodeSprint",
+  "name": "CodeSprint - event page for IEEE's FOSSFiesta",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "svg"
+    },
+    {
+      "src": "logo192.svg",
+      "type": "svg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.svg",
+      "type": "svg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#B04814",
+  "background_color": "#2b3531"
+}

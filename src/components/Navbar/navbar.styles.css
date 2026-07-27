@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 98%;
+    max-width: 1400px;
+    height: 74px;
+
+    background: #E8A045;
+
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    padding: 0 40px;
+
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.navbar-logo {
+    justify-self: start;
+
+    font-family: Inter, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 55px;
+
+    justify-self: center;
+}
+
+.navbar-links button {
+    background: transparent;
+    border: none;
+
+    color: #1c1c1c;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.navbar-links button:hover {
+    opacity: 0.75;
+}
+
+.navbar-register {
+
+    justify-self: end;
+
+    background: #22140f;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 3px;
+
+    letter-spacing: 2px;
+
+    font-size: 12px;
+}
+
+.navbar-register:hover {
+    background: #000;
+}
+
+@media (max-width: 900px) {
+    .navbar {
+        width: 94%;
+        height: 58px;
+        padding: 0 18px;
+    }
+
+    .navbar-logo {
+        font-size: 18px;
+    }
+
+    .navbar-links {
+        display: none;
+    }
+
+    .navbar-register {
+        padding: 8px 14px;
+        font-size: 10px;
+    }
+}

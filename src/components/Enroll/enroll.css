@@ -1,0 +1,16 @@
+.enroll-btn {
+  padding: 20px;
+  background: #DD8A35;
+  border-radius: 5px;
+}
+.enroll-btn:hover{
+    cursor: pointer;
+    background: #e6f0e4;
+    color: #DD8A35;
+}
+.postregister-container{
+ text-align: center;
+}
+.postregister-container{
+  margin-top: 100px;
+}

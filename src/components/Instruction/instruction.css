@@ -1,0 +1,13 @@
+.instruction-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    padding: 10px;
+    
+
+}
+.instruction-text{
+    padding-left: 20px;
+}

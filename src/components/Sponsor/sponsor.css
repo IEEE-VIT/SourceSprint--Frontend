@@ -1,0 +1,30 @@
+.sponsor-container {
+    margin: 10%;
+    align-items: center;
+}
+
+.sponsor-logo {
+    width: 422px;
+    height: 120px;
+}
+
+.sponsor-hr {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    height: 0px;
+    border: 1px solid #8c2e13;
+    margin: 0 0 40px 0;
+    width: 370px;
+  }
+
+.sponsor-heading {
+    font-size: 35px;
+    line-height: 37px;
+    text-align: center;
+    color: #FFF;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
