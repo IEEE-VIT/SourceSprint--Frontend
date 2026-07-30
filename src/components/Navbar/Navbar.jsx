@@ -22,16 +22,16 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-links">
-        <button onClick={() => scrollTo("timeline")}>
-          Schedule
-        </button>
-
         <button onClick={() => scrollTo("about")}>
-          Learn
+          About
         </button>
 
-        <button onClick={() => scrollTo("sprint")}>
-          Contribute
+        <button onClick={() => scrollTo("timeline")}>
+          Timeline
+        </button>
+
+        <button onClick={() => scrollTo("faq")}>
+          FAQ
         </button>
       </div>
 

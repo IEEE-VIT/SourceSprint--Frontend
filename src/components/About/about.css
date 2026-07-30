@@ -1,17 +1,31 @@
 .about-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 100px 24px;
   display: grid;
-  grid-template-columns: 1.1fr 1.3fr;
-  gap: 50px;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 40px;
   align-items: center;
   position: relative;
   z-index: 1;
 }
 
-.about-left-col {
+.about-content-card {
+  background: var(--bg-glass-card);
+  border: var(--border-gold);
+  border-radius: 16px;
+  padding: 45px 45px;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
   text-align: left;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  max-width: 580px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-content-card:hover {
+  border: var(--border-gold-hover);
+  box-shadow: var(--glow-gold-hover);
 }
 
 .about-text-heading {
@@ -27,99 +41,39 @@
   border: none;
   height: 3px;
   background: var(--underline-gradient);
-  margin: 0 0 30px 0;
-  width: 200px;
+  margin: 0 auto 35px auto;
+  width: 180px;
 }
 
 .about-description {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.7;
   color: var(--text-secondary);
-  text-align: justify;
-  margin: 0;
+  text-align: center;
+  margin: 0 0 20px 0;
 }
 
-.about-right-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.about-card {
-  background: var(--bg-glass-card);
-  backdrop-filter: var(--backdrop-blur);
-  -webkit-backdrop-filter: var(--backdrop-blur);
-  border: var(--border-gold);
-  border-radius: 12px;
-  padding: 24px;
-  text-align: left;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-}
-
-.about-card:hover {
-  border: var(--border-gold-hover);
-  box-shadow: var(--glow-gold-hover);
-  transform: translateY(-5px);
-}
-
-.about-card-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.about-card-text {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-muted);
+.about-description:last-child {
   margin: 0;
 }
 
 /* responsive media queries */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .about-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
     padding: 80px 24px;
   }
 
-  .about-left-col {
-    text-align: center;
-  }
-
-  .about-hr {
-    margin: 0 auto 30px auto;
-  }
-
-  .about-description {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+  .about-content-card {
+    padding: 40px 30px;
   }
 }
 
 @media (max-width: 640px) {
-  .about-right-col {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
   .about-text-heading {
     font-size: 32px;
   }
 
   .about-description {
-    font-size: 16px;
-  }
-
-  .about-card {
-    padding: 20px;
-  }
-
-  .about-card-title {
-    font-size: 18px;
+    font-size: 15px;
   }
 }

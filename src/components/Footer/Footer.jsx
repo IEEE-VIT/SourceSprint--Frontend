@@ -2,7 +2,6 @@ import React from "react";
 
 import "./footer.css";
 
-import IEEELogo from "../../assets/svg/footer-svg/IEEELoog-Black.svg";
 import SourceSprint from "../../assets/svg/footer-svg/sourcesprint-logo.png";
 import FacebookIcon from "../../assets/svg/footer-svg/facebook.svg";
 import LinkedInIcon from "../../assets/svg/footer-svg/linkedIn.svg";
@@ -11,43 +10,28 @@ import InstagramIcon from "../../assets/svg/footer-svg/instagram.svg";
 import TwitterIcon from "../../assets/svg/footer-svg/twitter.svg";
 
 import LinkImage from "../LinkImage/LinkImage";
-// import Button3 from "../Button/button-3";
 
-const facebook_link = "https://www.facebook.com/IEEEVIT/";
-const instagram_link = "https://www.instagram.com/ieeevitvellore/?hl=en";
-const github_link = "https://github.com/IEEE-VIT";
-const twitter_link = "https://twitter.com/ieeevitvellore";
-const linkedin_link = "https://in.linkedin.com/company/ieee-vit-vellore";
-const ieee_link = "https://ieeevit.org/";
+const facebook_link = "#";
+const instagram_link = "#";
+const github_link = "https://github.com";
+const twitter_link = "#";
+const linkedin_link = "#";
 
 const Footer = (props) => {
   return (
     <div className="footer-container">
       <div className="footer-1-container">
         <div className="footer-1">
-          <h1 className="footer-1-heading">IEEE-VIT SB</h1>
+          <h1 className="footer-1-heading">SOURCESPRINT</h1>
           <p className="footer-1-subtext">
-            IEEE VIT is one of the most active student chapters inside Region 10
-            of IEEE International. We're a diverse group of tech enthusiasts,
-            developers and designers who live with the motto "Advancing
-            Technology for Humanity".
+            A premier open-source event designed to bridge the gap between hobbyist developers
+            and active contributors. Master the tools, connect with the community, and jumpstart
+            your open-source journey.
           </p>
-          <a href={ieee_link} target="_blank" rel="noreferrer">
-            {" "}
-            {/* <Button3>VISIT WEBSITE</Button3> */}
-            {/* <button></button> */}
-          </a>
         </div>
       </div>
 
       <div className="footer-2-container-lg">
-        <LinkImage
-          link={"https://ieeevit.org/"}
-          img={IEEELogo}
-          link_class={"footer-link"}
-          img_class={"footer-2-lg-grid1"}
-        />
-
         <div className="footer-2-lg-grid2">
           <h1 className="footer-2-heading">CONTACT US</h1>
           <div className="footer-2-icons">
@@ -82,7 +66,7 @@ const Footer = (props) => {
               img_class="footer-social-icon"
             />
           </div>
-          <div className="footer-2-subtext">Copyright © 2023 IEEE-VIT. All rights reserved.</div>
+          <div className="footer-2-subtext">Copyright © 2026 SourceSprint. All rights reserved.</div>
         </div>
 
         <LinkImage
@@ -93,16 +77,8 @@ const Footer = (props) => {
         />
       </div>
 
-      {/* lkdfajdlfajkd-----------------------------------------------------------dj;saf */}
-
       <div className="footer-2-container-sm">
         <div className="footer-2-sm-grid1">
-          <LinkImage
-            link={"https://ieeevit.org/"}
-            img={IEEELogo}
-            link_class={"footer-link"}
-            img_class={"footer-2-sm-img footer-2-sm-img2"}
-          />
           <LinkImage
             link={""}
             img={SourceSprint}
@@ -145,7 +121,7 @@ const Footer = (props) => {
               img_class="footer-social-icon"
             />
           </div>
-          <div className="footer-2-subtext">Copyright © 2023 IEEE-VIT. All rights reserved.</div>
+          <div className="footer-2-subtext">Copyright © 2026 SourceSprint. All rights reserved.</div>
         </div>
       </div>
     </div>

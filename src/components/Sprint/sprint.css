@@ -1,75 +1,67 @@
-@import url(https://db.onlinewebfonts.com/c/4c19fc875e7ba1e6831129de3ab5ac0b?family=Retro+Gaming);
-/* Sprint container */
-.sprint-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 40px 0;
-    padding: 20px;
-    
-  }
-  
-  /* Sprint text content */
-  .sprint-text-content {
-    flex: 1;
-    padding: 20px;
-    text-align: left;
-    margin-left: 10%;
-  }
-  .sprint-text-content h2{
-    border-bottom: 2px solid #8C2E13; /* Orange underline for headings */
-    display: inline;
-  }
-  
-  /* Sprint image */
-  .sprint-image {
-    flex: 1;
-  }
-  
-  
-  
-  /* Button style */
-  button {
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.sprint-section {
+  padding: 80px 24px;
+  position: relative;
+  z-index: 1;
+}
 
-  .sprint-container2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    padding: 20px;
-    margin-right: 20%;
-  }
-  
-  .sprint-text-content2{
-    text-align: center;
-    font-size: 70px;
-    color: white;
-    height: 100%;
-    margin-left: 20%;
-    font-weight: bolder;
-  }
-  .text-below{
-    font-size: x-large;
-    font-weight: lighter;
-  }
-  
-  .register-button{
-    background-color: #DD8A35;
-    color: white;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 2%;
-    width: 100%;
-    font-family: "Retro Gaming";
-  }
+.sprint-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.sprint-card {
+  background: var(--bg-glass-card);
+  border: var(--border-gold);
+  border-radius: 16px;
+  padding: 45px 55px;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  max-width: 800px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sprint-card:hover {
+  border: var(--border-gold-hover);
+  box-shadow: var(--glow-gold-hover);
+}
+
+.sprint-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.sprint-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.sprint-btn {
+  background-color: #f6b36a;
+  color: #000315;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 3px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sprint-btn:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}

@@ -16,9 +16,9 @@ const Home = () => {
     window.location.reload();
   };
 
-  const scrollToTimeline = () => {
+  const scrollToAbout = () => {
     document
-      .getElementById("timeline")
+      .getElementById("about")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -48,7 +48,7 @@ const Home = () => {
             </button>
           )}
 
-          <button className="secondary-btn" onClick={scrollToTimeline}>
+          <button className="secondary-btn" onClick={scrollToAbout}>
             VIEW SCHEDULE
           </button>
         </div>
