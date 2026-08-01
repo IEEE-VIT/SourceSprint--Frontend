@@ -356,14 +356,7 @@ const GalaxyBackground = () => {
     };
     window.addEventListener("pointermove", handlePointerMove);
 
-    // 7. Scroll Progress Controller
-    let scrollProgress = 0;
-    const handleScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      const maxScroll = window.innerHeight * 0.85;
-      scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-    };
-    window.addEventListener("scroll", handleScroll);
+
 
     // 8. Resize Listener
     const handleResize = () => {
@@ -377,7 +370,6 @@ const GalaxyBackground = () => {
 
     // 9. Animation Loop
     let animationFrameId;
-    let currentScale = 1;
     let rotX = 0;
     let rotY = 0;
     let currentHoverBurst = 0;
@@ -539,7 +531,6 @@ const GalaxyBackground = () => {
     return () => {
       isMounted = false;
       window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
 

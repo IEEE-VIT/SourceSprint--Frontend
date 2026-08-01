@@ -60,16 +60,10 @@ function FAQ() {
 
   return (
     <section className="faq-section" id="faq">
-      {/* Decorative Galaxy Sparkles */}
-      <div className="galaxy-stars-overlay">
-        <div className="star-sparkle star-1">✨</div>
-        <div className="star-sparkle star-2">⭐</div>
-        <div className="star-sparkle star-3">💫</div>
-      </div>
+
 
       <div className="faq-container">
         <div className="faq-header">
-          <span className="faq-badge">✦ COSMIC FAQ ✦</span>
           <h1 className="faq-heading">FREQUENTLY ASKED QUESTIONS</h1>
           <hr className="faq-hr" />
           <p className="faq-subtext">

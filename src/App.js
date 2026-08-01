@@ -8,6 +8,7 @@ import EnrollPage1 from "./Pages/EnrollPage/EnrollPage1";
 import EnrollPage2 from "./Pages/EnrollPage/EnrollPage2";
 import GalaxyBackground from "./components/Home/GalaxyBackground";
 import RegistrationPage from "./Pages/RegistrationPage/registration";
+import ResourcesPage from "./Pages/ResourcesPage/ResourcesPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/register" component={RegistrationPage} />
+        <Route exact path="/resources" component={ResourcesPage} />
         <Route exact path="/enrolled/successful" component={EnrollPage} />
         <Route exact path="/enrolled/existing" component={EnrollPage1} />
         <Route exact path="/enrolled/idnotfound" component={EnrollPage2} />

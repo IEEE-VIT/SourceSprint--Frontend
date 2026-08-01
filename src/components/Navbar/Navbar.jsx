@@ -6,9 +6,18 @@ import "./navbar.styles.css";
 const Navbar = () => {
   const history = useHistory();
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-    });
+    if (window.location.pathname !== "/") {
+      history.push("/");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 100);
+    } else {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleRegister = () => {
@@ -24,15 +33,15 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-links">
-        <button onClick={() => scrollTo("about")}>
-          Learn
+        <button onClick={() => scrollTo("leaderboard")}>
+          Leaderboard
         </button>
 
         <button onClick={() => scrollTo("timeline")}>
           Schedule
         </button>
 
-        <button onClick={() => scrollTo("resources")}>
+        <button onClick={() => history.push("/resources")}>
           Resources
         </button>
 

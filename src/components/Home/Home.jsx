@@ -3,17 +3,12 @@ import { useHistory } from "react-router-dom";
 import "./home.css";
 
 import SSLogo from "../../assets/svg/home-svg/ss-logo.png";
-import GalaxyBackground from "./GalaxyBackground";
 
 const Home = () => {
   const history = useHistory();
 
   const handleRegisterClick = () => {
     history.push("/register");
-  };
-
-  const handleScheduleClick = () => {
-    document.getElementById("timeline")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -33,10 +28,6 @@ const Home = () => {
         <div className="hero-buttons">
           <button className="primary-btn-sharp" onClick={handleRegisterClick}>
             REGISTER NOW &gt;
-          </button>
-
-          <button className="secondary-btn-sharp" onClick={handleScheduleClick}>
-            VIEW SCHEDULE
           </button>
         </div>
       </div>

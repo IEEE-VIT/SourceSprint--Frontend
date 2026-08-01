@@ -4,7 +4,7 @@ import "./resources.css";
 const gitCommands = [
   {
     category: "Initial Setup",
-    command: 'git config --global user.name "Your Name"\ngit config --global user.email "you@example.com"',
+    command: 'git config --global user.name "github-username"\ngit config --global user.email "github-email"',
     description: "Set your identity before making any commits.",
     icon: "⚙️",
   },
@@ -51,54 +51,44 @@ const Resources = () => {
 
   return (
     <section id="resources" className="resources-section">
-      {/* Decorative Galaxy Stars and Nebulae */}
-      <div className="galaxy-stars-overlay">
-        <div className="star-sparkle star-1">✨</div>
-        <div className="star-sparkle star-2">⭐</div>
-        <div className="star-sparkle star-3">✨</div>
-        <div className="star-sparkle star-4">💫</div>
-      </div>
-
       <div className="resources-container">
+        {/* Page Main Header */}
         <div className="resources-header">
-          <span className="resources-badge">✦ COSMIC TOOLKIT ✦</span>
-          <h1 className="resources-title">GIT RESOURCES & SETUP</h1>
+          <h1 className="resources-title">GIT RESOURCES</h1>
           <hr className="resources-hr" />
           <p className="resources-subtitle">
-            Master local version control and launch your open source contributions into deep space.
+            Everything you need to set up your environment and master essential Git commands.
           </p>
         </div>
 
-        {/* Download Git Bash Card */}
+        {/* Section 1 Heading */}
+        <h2 className="section-heading">
+          <span className="section-number">01.</span> Setup & Installation
+        </h2>
+
+        {/* Setup & Installation Card */}
         <div className="git-bash-download-card">
-          <div className="download-glow"></div>
-          <div className="download-badge">⬇️ OFFICIAL TOOLKIT</div>
-          <div className="download-content">
-            <h2>Download Git Bash for SourceSprint</h2>
-            <p>
-              To participate in SourceSprint, you need <strong>Git Bash</strong> (or Git CLI) installed on your machine to execute terminal commands.
-              <br />
-              <span className="download-warning">
-                ⚠️ Note: Please download <strong>Git Bash</strong> from git-scm.com (Do not download GitHub Desktop — they are different tools).
-              </span>
-            </p>
-            <a
-              href="https://git-scm.com/downloads"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="download-git-btn"
-            >
-              DOWNLOAD GIT BASH →
-            </a>
-          </div>
+          <p className="download-content-text">
+            To participate in SourceSprint, you need <strong>Git Bash</strong> (or Git CLI) installed on your machine to execute terminal commands.
+            <br />
+            <span className="download-warning">
+              ⚠️ Note: Please download Git Bash from git-scm.com (Do not download GitHub Desktop; they are different tools).
+            </span>
+          </p>
+          <a
+            href="https://git-scm.com/downloads"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="download-git-btn"
+          >
+            DOWNLOAD GIT BASH →
+          </a>
         </div>
 
-        {/* Command Cheatsheet Section */}
-        <div className="cheatsheet-header">
-          <span className="cheatsheet-badge">ESSENTIAL COMMANDS</span>
-          <h2>Git Terminal Cheatsheet</h2>
-          <p>Quick copy reference for the commands you will use during the sprint.</p>
-        </div>
+        {/* Section 2 Heading */}
+        <h2 className="section-heading" style={{ marginTop: "40px", marginBottom: "24px" }}>
+          <span className="section-number">02.</span> Essential Commands
+        </h2>
 
         <div className="commands-grid">
           {gitCommands.map((item, index) => (
