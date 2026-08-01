@@ -23,11 +23,15 @@ const Navbar = () => {
 
       <div className="navbar-links">
         <button onClick={() => scrollTo("about")}>
-          About
+          Learn
         </button>
 
         <button onClick={() => scrollTo("timeline")}>
-          Timeline
+          Schedule
+        </button>
+
+        <button onClick={() => scrollTo("resources")}>
+          Resources
         </button>
 
         <button onClick={() => scrollTo("faq")}>
@@ -37,7 +41,7 @@ const Navbar = () => {
 
       <button
         className="navbar-register"
-        onClick={handleRegister}
+        onClick={() => scrollTo("home")}
       >
         REGISTER
       </button>

@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a11744f4.chunk.css",
+    "main.js": "/static/js/main.76dc9952.chunk.js",
+    "main.js.map": "/static/js/main.76dc9952.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d0220ebd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d0220ebd.js.map",
+    "static/js/2.bbc490fb.chunk.js": "/static/js/2.bbc490fb.chunk.js",
+    "static/js/2.bbc490fb.chunk.js.map": "/static/js/2.bbc490fb.chunk.js.map",
+    "static/js/3.fca66064.chunk.js": "/static/js/3.fca66064.chunk.js",
+    "static/js/3.fca66064.chunk.js.map": "/static/js/3.fca66064.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.a11744f4.chunk.css.map": "/static/css/main.a11744f4.chunk.css.map",
+    "static/js/2.bbc490fb.chunk.js.LICENSE.txt": "/static/js/2.bbc490fb.chunk.js.LICENSE.txt",
+    "static/media/arrow-down.8d55f08b.svg": "/static/media/arrow-down.8d55f08b.svg",
+    "static/media/enroll-letter.3b013561.svg": "/static/media/enroll-letter.3b013561.svg",
+    "static/media/facebook.33a7d61d.svg": "/static/media/facebook.33a7d61d.svg",
+    "static/media/github.320fd1ab.svg": "/static/media/github.320fd1ab.svg",
+    "static/media/instagram.0d3e4639.svg": "/static/media/instagram.0d3e4639.svg",
+    "static/media/linkedIn.cb525c53.svg": "/static/media/linkedIn.cb525c53.svg",
+    "static/media/navbar-logo.199924e5.svg": "/static/media/navbar-logo.199924e5.svg",
+    "static/media/sourcesprint-logo.ee13f871.png": "/static/media/sourcesprint-logo.ee13f871.png",
+    "static/media/ss-logo.8b3ece80.png": "/static/media/ss-logo.8b3ece80.png",
+    "static/media/twitter.193a169d.svg": "/static/media/twitter.193a169d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d0220ebd.js",
+    "static/js/2.bbc490fb.chunk.js",
+    "static/css/main.a11744f4.chunk.css",
+    "static/js/main.76dc9952.chunk.js"
+  ]
+}

@@ -1,31 +1,23 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./home.css";
 
 import SSLogo from "../../assets/svg/home-svg/ss-logo.png";
 import GalaxyBackground from "./GalaxyBackground";
 
 const Home = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const history = useHistory();
 
-  const handleRegister = () => {
-    alert("Registration Coming Soon!");
+  const handleRegisterClick = () => {
+    history.push("/enrolled/successful");
   };
 
-  const handleLogOut = () => {
-    localStorage.setItem("isLoggedIn", false);
-    window.location.reload();
-  };
-
-  const scrollToAbout = () => {
-    document
-      .getElementById("about")
-      ?.scrollIntoView({ behavior: "smooth" });
+  const handleScheduleClick = () => {
+    document.getElementById("timeline")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section id="home" className="home-container">
-      <GalaxyBackground />
-
       <div className="hero-content">
         <img src={SSLogo} alt="SourceSprint" className="sourcesprint-logo" />
 
@@ -37,18 +29,13 @@ const Home = () => {
           bridge the gap between hobbyist and contributor.
         </p>
 
+        {/* Action Buttons matching Image 1 */}
         <div className="hero-buttons">
-          {isLoggedIn === "true" ? (
-            <button className="primary-btn" onClick={handleLogOut}>
-              LOG OUT
-            </button>
-          ) : (
-            <button className="primary-btn" onClick={handleRegister}>
-              REGISTER NOW →
-            </button>
-          )}
+          <button className="primary-btn-sharp" onClick={handleRegisterClick}>
+            REGISTER NOW &gt;
+          </button>
 
-          <button className="secondary-btn" onClick={scrollToAbout}>
+          <button className="secondary-btn-sharp" onClick={handleScheduleClick}>
             VIEW SCHEDULE
           </button>
         </div>

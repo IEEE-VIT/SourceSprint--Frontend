@@ -1,16 +1,81 @@
-.enroll-btn {
-  padding: 20px;
-  background: #DD8A35;
-  border-radius: 5px;
+.postregister-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 40px 20px;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
 }
-.enroll-btn:hover{
-    cursor: pointer;
-    background: #e6f0e4;
-    color: #DD8A35;
+
+.postregister-card {
+  background: rgba(18, 14, 28, 0.85);
+  border: 1px solid rgba(232, 160, 69, 0.35);
+  border-radius: 20px;
+  padding: 50px 40px;
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(232, 160, 69, 0.15);
 }
-.postregister-container{
- text-align: center;
+
+.postregister-badge {
+  display: inline-block;
+  background: rgba(232, 160, 69, 0.15);
+  border: 1px solid rgba(232, 160, 69, 0.4);
+  color: #E8A045;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  margin-bottom: 18px;
 }
-.postregister-container{
-  margin-top: 100px;
+
+.postregister-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f6b36a;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.postregister-subtitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.postregister-text {
+  font-size: 15px;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.enroll-btn-sharp {
+  background: #fcae69;
+  color: #120e1c;
+  border: none;
+  border-radius: 0;
+  padding: 14px 28px;
+  font-family: "Courier New", Courier, monospace, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(252, 174, 105, 0.25);
+  text-decoration: none;
+}
+
+.enroll-btn-sharp:hover {
+  background: #ffbe82;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(252, 174, 105, 0.4);
 }

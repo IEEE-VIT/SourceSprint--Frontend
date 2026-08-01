@@ -18,13 +18,30 @@ const GalaxyBackground = () => {
     const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
     camera.position.z = 6.5;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.domElement.addEventListener("webglcontextlost", (e) => {
+        e.preventDefault();
+        console.warn("WebGL context lost handled gracefully.");
+      }, false);
+    } catch (e) {
+      console.warn("WebGL initialization failed:", e);
+      return;
+    }
+
+    let isMounted = true;
+
+    // Clean up any stale canvas elements from previous mounts
+    while (mount.firstChild) {
+      mount.removeChild(mount.firstChild);
+    }
     mount.appendChild(renderer.domElement);
 
     // --- 2. Deep Space Galaxy Background Stars ---
-    const starCount = 4500;
+    const starCount = 1800;
     const starPositions = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
 
@@ -33,12 +50,12 @@ const GalaxyBackground = () => {
     const colorWhite = new THREE.Color("#ffffff");
 
     for (let i = 0; i < starCount; i++) {
-      starPositions[i * 3] = (Math.random() - 0.5) * 36;
-      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 36;
-      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 16 - 4;
+      starPositions[i * 3] = (Math.random() - 0.5) * 32;
+      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 32;
+      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 14 - 4;
 
       const rand = Math.random();
-      const c = rand > 0.85 ? colorGold : rand > 0.35 ? colorWhite : colorBlue;
+      const c = rand > 0.8 ? colorGold : rand > 0.4 ? colorWhite : colorBlue;
       starColors[i * 3] = c.r;
       starColors[i * 3 + 1] = c.g;
       starColors[i * 3 + 2] = c.b;
@@ -49,105 +66,72 @@ const GalaxyBackground = () => {
     starGeo.setAttribute("color", new THREE.BufferAttribute(starColors, 3));
 
     const starMat = new THREE.PointsMaterial({
-      size: 0.02,
+      size: 0.022,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.65,
       blending: THREE.AdditiveBlending,
     });
     const galaxyStars = new THREE.Points(starGeo, starMat);
     scene.add(galaxyStars);
 
-    // --- 2b. Constellations Background ---
-    const constellationGroup = new THREE.Group();
-    scene.add(constellationGroup);
 
-    // Highly randomized coordinates to distribute left constellations naturally
-    const constellationsData = [
-      // Top-Left Constellation (Zig-zag)
-      [
-        new THREE.Vector3(-4.4, 2.3, 0),
-        new THREE.Vector3(-3.1, 2.0, 0),
-        new THREE.Vector3(-3.8, 1.3, 0),
-        new THREE.Vector3(-2.6, 1.0, 0)
-      ],
-      // Top-Right Constellation (Zig-zag)
-      [
-        new THREE.Vector3(4.4, 2.3, 0),
-        new THREE.Vector3(3.1, 2.0, 0),
-        new THREE.Vector3(3.8, 1.3, 0),
-        new THREE.Vector3(2.6, 1.0, 0)
-      ],
-      // Bottom-Left Constellation (Hook)
-      [
-        new THREE.Vector3(-3.9, -1.2, 0),
-        new THREE.Vector3(-4.3, -2.1, 0),
-        new THREE.Vector3(-3.0, -2.3, 0),
-        new THREE.Vector3(-2.2, -1.5, 0)
-      ],
-      // Bottom-Right Constellation (Hook)
-      [
-        new THREE.Vector3(3.9, -1.2, 0),
-        new THREE.Vector3(4.3, -2.1, 0),
-        new THREE.Vector3(3.0, -2.3, 0),
-        new THREE.Vector3(2.2, -1.5, 0)
-      ]
-    ];
 
-    const starCoreGeom = new THREE.SphereGeometry(0.0035, 6, 6);
-    const starGlowGeom = new THREE.SphereGeometry(0.009, 6, 6);
-    const constellationStarMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.6
-    });
-    const constellationGlowMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.12,
-      blending: THREE.AdditiveBlending
-    });
+    // --- 2c. Meteor Cursor Trail Particles ---
+    const cursorTrailCount = 120;
+    const cursorTrailPos = new Float32Array(cursorTrailCount * 3);
+    const cursorTrailColors = new Float32Array(cursorTrailCount * 3);
+    const cursorTrailSizes = new Float32Array(cursorTrailCount);
+    const cursorParticlesData = [];
 
-    const constellationLineMat = new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.12,
-      blending: THREE.AdditiveBlending
-    });
+    for (let i = 0; i < cursorTrailCount; i++) {
+      cursorTrailPos[i * 3] = 999;
+      cursorTrailPos[i * 3 + 1] = 999;
+      cursorTrailPos[i * 3 + 2] = 0;
 
-    constellationGroup.position.z = -1;
-    const constellationGlowMeshes = [];
+      const c = Math.random() > 0.4 ? colorGold : colorWhite;
+      cursorTrailColors[i * 3] = c.r;
+      cursorTrailColors[i * 3 + 1] = c.g;
+      cursorTrailColors[i * 3 + 2] = c.b;
+      cursorTrailSizes[i] = 0;
 
-    constellationsData.forEach((pts) => {
-      // Create lines
-      const lineGeom = new THREE.BufferGeometry().setFromPoints(pts);
-      const lineMesh = new THREE.Line(lineGeom, constellationLineMat);
-      constellationGroup.add(lineMesh);
-
-      // Create glowing stars at vertices
-      pts.forEach((pt) => {
-        const starMesh = new THREE.Mesh(starCoreGeom, constellationStarMat);
-        starMesh.position.copy(pt);
-        constellationGroup.add(starMesh);
-
-        const glowMesh = new THREE.Mesh(starGlowGeom, constellationGlowMat);
-        glowMesh.position.copy(pt);
-        constellationGroup.add(glowMesh);
-        constellationGlowMeshes.push(glowMesh);
+      cursorParticlesData.push({
+        x: 999,
+        y: 999,
+        z: 0,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        life: 0,
+        maxLife: 1,
       });
+    }
+
+    const cursorTrailGeo = new THREE.BufferGeometry();
+    cursorTrailGeo.setAttribute("position", new THREE.BufferAttribute(cursorTrailPos, 3));
+    cursorTrailGeo.setAttribute("color", new THREE.BufferAttribute(cursorTrailColors, 3));
+
+    const cursorTrailMat = new THREE.PointsMaterial({
+      size: 0.045,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.9,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
+
+    const cursorTrailMesh = new THREE.Points(cursorTrailGeo, cursorTrailMat);
+    scene.add(cursorTrailMesh);
 
     // --- 3. Interactive Object Group ---
     const objectGroup = new THREE.Group();
-    objectGroup.position.x = width > 768 ? 1.55 : 0;
+    const defaultXPosition = width > 768 ? 1.8 : 0;
+    objectGroup.position.x = defaultXPosition;
     objectGroup.position.y = 0;
     scene.add(objectGroup);
 
     const totalCount = 4200;
     const saturnPos = new Float32Array(totalCount * 3);
-    const githubPos = new Float32Array(totalCount * 3);
-    const clockPos = new Float32Array(totalCount * 3);
-    const dispersePos = new Float32Array(totalCount * 3);
     const currentPos = new Float32Array(totalCount * 3);
     const particleColors = new Float32Array(totalCount * 3);
     const dispersionVector = new Float32Array(totalCount * 3);
@@ -155,31 +139,56 @@ const GalaxyBackground = () => {
     const amber = new THREE.Color("#f6b36a");
     const gold = new THREE.Color("#d4883b");
 
-    // --- 4. Official Upright Vector GitHub Octocat Logo Path ---
+    // --- 5. Parse Vector SVG for Official GitHub Octocat Logo (Matching Image 2) ---
     const githubSvgString = `
       <svg viewBox="0 0 100 100">
-        <path d="M 50 5 A 45 45 0 1 0 50 95 A 45 45 0 1 0 50 5 Z" />
-        <path d="M 50 25 C 36 25 25 36 25 50 C 25 61.2 32.3 70.7 42.4 74 C 43.7 74.3 44.1 73.4 44.1 72.8 C 44.1 72.2 44.1 70.6 44 68.3 C 37 69.8 35.5 64.9 35.5 64.9 C 34.4 62 32.8 61.2 32.8 61.2 C 30.5 59.7 33 59.7 33 59.7 C 35.5 59.9 36.8 62.3 36.8 62.3 C 39.1 66.2 42.7 65.1 44.1 64.4 C 44.3 62.7 45 61.6 45.8 60.8 C 40.2 60.2 34.3 58 34.3 48.3 C 34.3 45.5 35.3 43.2 36.9 41.4 C 36.6 40.8 35.7 38.1 37.2 34.6 C 37.2 34.6 39.4 33.9 44.3 37.2 C 46.4 36.6 48.7 36.3 50.9 36.3 C 53.1 36.3 55.4 36.6 57.5 37.2 C 62.4 33.9 64.6 34.6 64.6 34.6 C 66.1 38.1 65.2 40.8 64.9 41.4 C 66.5 43.2 67.5 45.5 67.5 48.3 C 67.5 58 61.6 60.2 56 60.8 C 57 61.7 57.8 63.3 57.8 65.7 C 57.8 69.2 57.7 72.1 57.7 72.8 C 57.7 73.4 58.1 74.3 59.4 74 C 69.5 70.7 76.8 61.2 76.8 50 C 76.8 36 65.7 25 50 25 Z" />
+        <path d="M 50 0 C 22.4 0 0 22.4 0 50 C 0 72.1 14.3 90.8 34.2 97.4 C 36.7 97.9 37.6 96.3 37.6 95 C 37.6 93.9 37.6 90.8 37.5 86.9 C 23.6 89.9 20.7 80.2 20.7 80.2 C 18.4 74.4 15.1 72.9 15.1 72.9 C 10.6 69.8 15.4 69.9 15.4 69.9 C 20.4 70.2 23 75 23 75 C 27.4 82.5 34.6 80.3 37.4 79 C 37.8 75.8 39.1 73.6 40.5 72.4 C 29.4 71.1 17.7 66.8 17.7 47.6 C 17.7 42.1 19.7 37.6 22.9 34.1 C 22.4 32.8 20.7 27.7 23.4 20.8 C 23.4 20.8 27.6 19.5 37.2 26 C 41.2 24.9 45.4 24.3 49.6 24.3 C 53.8 24.3 58 24.9 62 26 C 71.6 19.5 75.8 20.8 75.8 20.8 C 78.5 27.7 76.8 32.8 76.3 34.1 C 79.6 37.6 81.5 42.1 81.5 47.6 C 81.5 66.9 69.8 71.1 58.6 72.3 C 60.4 73.9 62 77 62 81.7 C 62 88.4 61.9 93.8 61.9 95 C 61.9 96.3 62.8 97.9 65.3 97.4 C 85.2 90.8 99.5 72.1 99.5 50 C 99.5 22.4 77.1 0 49.6 0 Z" />
       </svg>
     `;
 
-    const svgLoader = new SVGLoader();
-    const svgData = svgLoader.parse(githubSvgString);
-    const sampledPoints = [];
+    const sampledCatPoints = [];
 
-    svgData.paths.forEach((path) => {
-      const shapes = SVGLoader.createShapes(path);
-      shapes.forEach((shape) => {
-        const points = shape.getSpacedPoints(1800);
-        points.forEach((pt) => {
-          const nx = ((pt.x - 50) / 50) * 1.65;
-          const ny = -((pt.y - 50) / 50) * 1.65;
-          sampledPoints.push({ x: nx, y: ny });
+    try {
+      const svgLoader = new SVGLoader();
+      const svgData = svgLoader.parse(githubSvgString);
+      if (svgData && svgData.paths) {
+        svgData.paths.forEach((path) => {
+          const shapes = SVGLoader.createShapes(path);
+          shapes.forEach((shape) => {
+            const points = shape.getSpacedPoints(1800);
+            points.forEach((pt) => {
+              const nx = ((pt.x - 50) / 50) * 1.85;
+              const ny = -((pt.y - 50) / 50) * 1.85;
+              sampledCatPoints.push({ x: nx, y: ny });
+            });
+          });
         });
-      });
-    });
+      }
+    } catch (e) {
+      console.warn("SVG sampling warning:", e);
+    }
 
-    // --- 5. Generate Target Maps (Saturn, GitHub, Enlarge Clock, Disperse) ---
+    // Safety fallback: Parametric GitHub Octocat Logo generator if SVG parsing is empty
+    if (sampledCatPoints.length === 0) {
+      // 1. Head circle & Ears
+      for (let p = 0; p < 1500; p++) {
+        const angle = Math.random() * Math.PI * 2;
+        const r = 1.05 + (Math.random() - 0.5) * 0.05;
+        let px = Math.cos(angle) * r;
+        let py = Math.sin(angle) * r + 0.1;
+        // Ear points
+        if (py > 0.7 && Math.abs(px) > 0.4) {
+          py += 0.35;
+        }
+        sampledCatPoints.push({ x: px, y: py });
+      }
+    }
+
+    // --- 6. Generate Saturn, Git Cat & Clock Target Maps ---
+    const gitCatPos = new Float32Array(totalCount * 3);
+    const clockPos = new Float32Array(totalCount * 3);
+    const nebulaPos = new Float32Array(totalCount * 3);
+
     for (let i = 0; i < totalCount; i++) {
       // SATURN MESH
       let sx, sy, sz;
@@ -218,57 +227,71 @@ const GalaxyBackground = () => {
       dispersionVector[i * 3 + 1] = (sy / len) * (1.1 + Math.random() * 2.2);
       dispersionVector[i * 3 + 2] = (sz / len) * (1.1 + Math.random() * 2.2);
 
-      // GITHUB LOGO SILHOUETTE TARGETS
-      const targetPoint = sampledPoints[i % sampledPoints.length];
-      githubPos[i * 3] = targetPoint.x + (Math.random() - 0.5) * 0.04;
-      githubPos[i * 3 + 1] = targetPoint.y + (Math.random() - 0.5) * 0.04;
-      githubPos[i * 3 + 2] = (Math.random() - 0.5) * 0.04;
-
-      // ENLARGED 3D CLOCK TARGET MAP (50% larger)
-      let cx, cy, cz;
-      const pClock = Math.random();
-      if (pClock < 0.55) {
-        // Clock Outer Ring Circle (Expanded Radius 1.65)
+      // GIT CAT TARGETS (Dual Concentric Rings + Centered Octocat Silhouette matching Image 2)
+      if (i < 1300) {
+        // 1. Outer Concentric Ring
         const angle = Math.random() * Math.PI * 2;
-        const r = 1.65 + (Math.random() - 0.5) * 0.08;
+        const r = 2.15 + (Math.random() - 0.5) * 0.05;
+        gitCatPos[i * 3] = Math.cos(angle) * r;
+        gitCatPos[i * 3 + 1] = Math.sin(angle) * r;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+      } else if (i < 2500) {
+        // 2. Inner Concentric Ring
+        const angle = Math.random() * Math.PI * 2;
+        const r = 1.55 + (Math.random() - 0.5) * 0.05;
+        gitCatPos[i * 3] = Math.cos(angle) * r;
+        gitCatPos[i * 3 + 1] = Math.sin(angle) * r;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+      } else {
+        // 3. Centered GitHub Octocat Silhouette
+        const catPt = sampledCatPoints[i % sampledCatPoints.length] || { x: 0, y: 0 };
+        const scaleCat = 0.65;
+        gitCatPos[i * 3] = catPt.x * scaleCat + (Math.random() - 0.5) * 0.02;
+        gitCatPos[i * 3 + 1] = catPt.y * scaleCat + (Math.random() - 0.5) * 0.02;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+      }
+
+      // CLOCK SILHOUETTE TARGETS (Matching user's clock image)
+      let cx = 0, cy = 0, cz = (Math.random() - 0.5) * 0.08;
+
+      if (i < 2600) {
+        // Outer Circle Ring
+        const angle = Math.random() * Math.PI * 2;
+        const r = 1.65 + (Math.random() - 0.5) * 0.06;
         cx = Math.cos(angle) * r;
         cy = Math.sin(angle) * r;
-        cz = (Math.random() - 0.5) * 0.08;
-      } else if (pClock < 0.82) {
-        // Clock Hands (Vertical hand 12:00, Horizontal hand 3:00)
-        const handChoice = Math.random();
-        if (handChoice < 0.45) {
-          // Vertical hour hand (0, 0) to (0, 0.85)
-          const lenHand = Math.random() * 0.85;
-          cx = (Math.random() - 0.5) * 0.06;
-          cy = lenHand;
-          cz = (Math.random() - 0.5) * 0.08;
-        } else {
-          // Horizontal minute hand (0, 0) to (0.70, 0)
-          const lenHand = Math.random() * 0.70;
-          cx = lenHand;
-          cy = (Math.random() - 0.5) * 0.06;
-          cz = (Math.random() - 0.5) * 0.08;
-        }
+      } else if (i < 3400) {
+        // 12 Tick Marks on the perimeter
+        const tickIndex = Math.floor(Math.random() * 12);
+        const tickAngle = (tickIndex * Math.PI) / 6;
+        const t = Math.random() * 0.22;
+        const r = 1.65 - t;
+        cx = Math.cos(tickAngle) * r;
+        cy = Math.sin(tickAngle) * r;
+      } else if (i < 3800) {
+        // Minute Hand pointing straight UP to 12:00
+        const t = Math.random();
+        cx = (Math.random() - 0.5) * 0.04;
+        cy = t * 1.15;
       } else {
-        // 12 Ticks around the enlarged clock perimeter
-        const tickIdx = Math.floor(Math.random() * 12);
-        const tickAngle = (tickIdx / 12) * Math.PI * 2;
-        const tickLen = 1.42 + Math.random() * 0.22;
-        cx = Math.cos(tickAngle) * tickLen;
-        cy = Math.sin(tickAngle) * tickLen;
-        cz = (Math.random() - 0.5) * 0.08;
+        // Hour Hand pointing Down-Right to 4:00 (angle ~ -30 deg)
+        const t = Math.random();
+        const hourAngle = -Math.PI / 6;
+        const r = t * 0.85;
+        cx = Math.cos(hourAngle) * r + (Math.random() - 0.5) * 0.03;
+        cy = Math.sin(hourAngle) * r + (Math.random() - 0.5) * 0.03;
       }
+
       clockPos[i * 3] = cx;
       clockPos[i * 3 + 1] = cy;
       clockPos[i * 3 + 2] = cz;
 
-      // DISPERSE TARGET MAP (For FAQ disappearance)
-      const dAngle = Math.random() * Math.PI * 2;
-      const dR = 2.5 + Math.random() * 2.5;
-      dispersePos[i * 3] = Math.cos(dAngle) * dR;
-      dispersePos[i * 3 + 1] = Math.sin(dAngle) * dR;
-      dispersePos[i * 3 + 2] = (Math.random() - 0.5) * 1.5;
+      // NEBULA STARFIELD TARGETS (Scatter for Git Resources & FAQ sections)
+      const nebAngle = Math.random() * Math.PI * 2 + (i * 0.003);
+      const nebDist = 0.8 + Math.pow(Math.random(), 0.6) * 5.2;
+      nebulaPos[i * 3] = Math.cos(nebAngle) * nebDist + (Math.random() - 0.5) * 1.5;
+      nebulaPos[i * 3 + 1] = Math.sin(nebAngle) * nebDist * 0.85 + (Math.random() - 0.5) * 1.2;
+      nebulaPos[i * 3 + 2] = (Math.random() - 0.5) * 4.0;
 
       const c = isRing ? (Math.random() > 0.4 ? amber : colorWhite) : (Math.random() > 0.5 ? amber : gold);
       particleColors[i * 3] = c.r;
@@ -292,12 +315,39 @@ const GalaxyBackground = () => {
     const mainParticles = new THREE.Points(particleGeo, particleMat);
     objectGroup.add(mainParticles);
 
-    // 6. Mouse Pointer Physics
-    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, isHovered: false };
+    // 6. Mouse Pointer Physics & Meteor Trail Emitter
+    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, worldX: 0, worldY: 0, isHovered: false };
+    let cursorIndex = 0;
 
     const handlePointerMove = (e) => {
       mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      // Project mouse to 3D world coordinates for meteor trail
+      const vec = new THREE.Vector3(mouse.targetX, mouse.targetY, 0.5);
+      vec.unproject(camera);
+      const dir = vec.sub(camera.position).normalize();
+      const distance = -camera.position.z / dir.z;
+      const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+
+      mouse.worldX = pos.x;
+      mouse.worldY = pos.y;
+
+      // Emit meteor cursor particles
+      for (let k = 0; k < 3; k++) {
+        const idx = (cursorIndex + k) % cursorTrailCount;
+        cursorParticlesData[idx] = {
+          x: pos.x + (Math.random() - 0.5) * 0.1,
+          y: pos.y + (Math.random() - 0.5) * 0.1,
+          z: (Math.random() - 0.5) * 0.2,
+          vx: (Math.random() - 0.5) * 0.02,
+          vy: (Math.random() - 0.5) * 0.02,
+          vz: (Math.random() - 0.5) * 0.02,
+          life: 1.0,
+          maxLife: 0.4 + Math.random() * 0.4,
+        };
+      }
+      cursorIndex = (cursorIndex + 3) % cursorTrailCount;
 
       const targetXPos = width > 768 ? 0.35 : 0;
       const dx = mouse.targetX - targetXPos;
@@ -306,24 +356,22 @@ const GalaxyBackground = () => {
     };
     window.addEventListener("pointermove", handlePointerMove);
 
-    // 7. Scroll Physics Handler
+    // 7. Scroll Progress Controller
     let scrollProgress = 0;
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        scrollProgress = Math.min(1, Math.max(0, window.scrollY / totalScroll));
-      }
+      const scrollY = window.scrollY || window.pageYOffset;
+      const maxScroll = window.innerHeight * 0.85;
+      scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
     };
     window.addEventListener("scroll", handleScroll);
 
-    // 8. Resize Handler
+    // 8. Resize Listener
     const handleResize = () => {
       const w = mount.clientWidth || window.innerWidth;
       const h = mount.clientHeight || window.innerHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-      objectGroup.position.x = w > 768 ? 1.55 : 0;
     };
     window.addEventListener("resize", handleResize);
 
@@ -333,7 +381,6 @@ const GalaxyBackground = () => {
     let rotX = 0;
     let rotY = 0;
     let currentHoverBurst = 0;
-    let constellationHover = 0;
 
     const animate = () => {
       mouse.x += (mouse.targetX - mouse.x) * 0.04;
@@ -343,140 +390,173 @@ const GalaxyBackground = () => {
       galaxyStars.rotation.x = -mouse.y * 0.12;
       galaxyStars.position.x = mouse.x * 0.2;
 
-      // Edge hover detection
-      const distFromCenter = Math.sqrt(mouse.targetX * mouse.targetX + mouse.targetY * mouse.targetY);
-      const isNearEdges = distFromCenter > 0.45;
-      const targetConstellationHover = isNearEdges ? 1.0 : 0.0;
-      constellationHover += (targetConstellationHover - constellationHover) * 0.1;
 
-      constellationLineMat.opacity = 0.05 + constellationHover * 0.20;
-      constellationStarMat.opacity = 0.35 + constellationHover * 0.65;
 
-      const time = Date.now() * 0.005;
-      const glowScale = 1.0 + constellationHover * (0.4 + Math.sin(time) * 0.2);
-      constellationGlowMeshes.forEach((mesh) => {
-        mesh.scale.set(glowScale, glowScale, glowScale);
-        mesh.material.opacity = 0.08 + constellationHover * 0.32;
-      });
+      // Update Meteor Cursor Particles safely
+      if (cursorTrailGeo && cursorTrailGeo.attributes && cursorTrailGeo.attributes.position) {
+        const cPosArr = cursorTrailGeo.attributes.position.array;
+        for (let i = 0; i < cursorTrailCount; i++) {
+          const p = cursorParticlesData[i];
+          if (p && p.life > 0) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.z += p.vz;
+            p.life -= 0.025 / p.maxLife;
 
-      constellationGroup.rotation.y = Date.now() * 0.000005;
-      constellationGroup.rotation.x = -mouse.y * 0.02 * constellationHover;
-      constellationGroup.position.x = mouse.x * 0.03 * constellationHover;
+            cPosArr[i * 3] = p.x;
+            cPosArr[i * 3 + 1] = p.y;
+            cPosArr[i * 3 + 2] = p.z;
+          } else {
+            cPosArr[i * 3] = 999;
+            cPosArr[i * 3 + 1] = 999;
+            cPosArr[i * 3 + 2] = 0;
+          }
+        }
+        cursorTrailGeo.attributes.position.needsUpdate = true;
+      }
 
-      const targetHoverBurst = mouse.isHovered && scrollProgress < 0.1 ? 0.35 : 0.0;
+      // --- DOM SECTION BASED MORPHING TIMING ---
+      const aboutEl = document.getElementById("about");
+      const timelineEl = document.getElementById("timeline");
+      const resourcesEl = document.getElementById("resources") || document.getElementById("faq");
+      const vh = window.innerHeight;
+
+      let saturnToCatProgress = 0;
+      let catToClockProgress = 0;
+      let clockToNebulaProgress = 0;
+
+      if (aboutEl) {
+        const aboutTop = aboutEl.getBoundingClientRect().top;
+        const startMorphY = vh * 0.85;
+        const endMorphY = vh * 0.35;
+        saturnToCatProgress = Math.min(Math.max((startMorphY - aboutTop) / (startMorphY - endMorphY), 0), 1);
+      }
+
+      if (timelineEl) {
+        const timelineTop = timelineEl.getBoundingClientRect().top;
+        const startClockY = vh * 0.45; // Only start morphing to clock when timeline enters top-middle viewport
+        const endClockY = vh * 0.15;
+        catToClockProgress = Math.min(Math.max((startClockY - timelineTop) / (startClockY - endClockY), 0), 1);
+      }
+
+      if (resourcesEl) {
+        const resourcesTop = resourcesEl.getBoundingClientRect().top;
+        const startNebulaY = vh * 0.7; // Start scattering into nebula background for Resources & FAQ
+        const endNebulaY = vh * 0.2;
+        clockToNebulaProgress = Math.min(Math.max((startNebulaY - resourcesTop) / (startNebulaY - endNebulaY), 0), 1);
+      }
+
+      // Hover expansion factor (active only near top of page)
+      const targetHoverBurst = mouse.isHovered && saturnToCatProgress < 0.1 ? 0.35 : 0.0;
       currentHoverBurst += (targetHoverBurst - currentHoverBurst) * 0.15;
 
-      if (scrollProgress < 0.15) {
-        const initialSaturnTiltZ = Math.PI / 6;
-        objectGroup.rotation.z = initialSaturnTiltZ * (1 - scrollProgress / 0.15);
+      // Smoothly un-tilt Saturn to 0 so the GitHub Octocat logo is 100% perfectly straight & upright
+      const initialSaturnTiltZ = Math.PI / 6;
+      objectGroup.rotation.z = initialSaturnTiltZ * Math.max(0, 1 - saturnToCatProgress * 2.5);
 
+      if (clockToNebulaProgress > 0.05) {
+        // Slow ambient rotation for background nebula cloud
+        rotY += 0.0015;
+        rotX += (0 - rotX) * 0.08;
+      } else if (saturnToCatProgress > 0.05) {
+        rotX += (0 - rotX) * 0.12;
+        rotY += (0 - rotY) * 0.12;
+      } else {
         if (mouse.isHovered) {
           const targetRotX = -mouse.y * 0.45;
           const targetRotY = mouse.x * 0.6;
           rotX += (targetRotX - rotX) * 0.08;
           rotY += (targetRotY - rotY) * 0.08;
-          currentScale += (1.12 - currentScale) * 0.06;
         } else {
           rotX += (0 - rotX) * 0.05;
           rotY += 0.003;
-          currentScale += (1.0 - currentScale) * 0.06;
         }
-      } else {
-        objectGroup.rotation.z += (0 - objectGroup.rotation.z) * 0.1;
-        rotX += (0 - rotX) * 0.1;
-        rotY += (0 - rotY) * 0.1;
-        currentScale += (1.0 - currentScale) * 0.06;
       }
 
       objectGroup.rotation.x = rotX;
       objectGroup.rotation.y = rotY;
-      objectGroup.scale.set(currentScale, currentScale, currentScale);
 
-      // --- 4-STAGE INTERPOLATION: Saturn -> Git Cat -> Clock -> Disappear ---
-      const posAttr = particleGeo.attributes.position;
-      const posArr = posAttr.array;
+      if (particleGeo && particleGeo.attributes && particleGeo.attributes.position) {
+        const posAttr = particleGeo.attributes.position;
+        const posArr = posAttr.array;
 
-      let fromPos, toPos, stageFactor;
-      let targetOpacity = 0.88;
+        const easeCat = 1 - Math.pow(1 - saturnToCatProgress, 3);
+        const easeClock = 1 - Math.pow(1 - catToClockProgress, 3);
+        const easeNebula = 1 - Math.pow(1 - clockToNebulaProgress, 3);
 
-      if (scrollProgress < 0.18) {
-        // Stage 1: Home -> About (Saturn -> Git Cat) - Forms early!
-        fromPos = saturnPos;
-        toPos = githubPos;
-        stageFactor = Math.min(1, Math.max(0, scrollProgress / 0.18));
-      } else if (scrollProgress < 0.38) {
-        // Stage 1 Hold: Stays fully formed as Git Cat on About page
-        fromPos = githubPos;
-        toPos = githubPos;
-        stageFactor = 1.0;
-      } else if (scrollProgress < 0.58) {
-        // Stage 2: About -> Timeline (Git Cat -> Clock) - Forms Clock by Timeline!
-        fromPos = githubPos;
-        toPos = clockPos;
-        stageFactor = Math.min(1, Math.max(0, (scrollProgress - 0.38) / 0.20));
-      } else if (scrollProgress < 0.72) {
-        // Stage 2 Hold: Stays fully formed as Clock on Timeline page
-        fromPos = clockPos;
-        toPos = clockPos;
-        stageFactor = 1.0;
-      } else {
-        // Stage 3: Timeline -> FAQ (Clock -> Disappear!)
-        fromPos = clockPos;
-        toPos = dispersePos;
-        stageFactor = Math.min(1, Math.max(0, (scrollProgress - 0.72) / 0.18));
-        targetOpacity = 0.88 * (1.0 - stageFactor);
-      }
+        for (let i = 0; i < totalCount; i++) {
+          const ix = i * 3;
+          const iy = i * 3 + 1;
+          const iz = i * 3 + 2;
 
-      particleMat.opacity = targetOpacity;
+          const saturnX = saturnPos[ix] + dispersionVector[ix] * currentHoverBurst;
+          const saturnY = saturnPos[iy] + dispersionVector[iy] * currentHoverBurst;
+          const saturnZ = saturnPos[iz] + dispersionVector[iz] * currentHoverBurst;
 
-      const ease = stageFactor * stageFactor * (3 - 2 * stageFactor);
+          const catX = gitCatPos[ix];
+          const catY = gitCatPos[iy];
+          const catZ = gitCatPos[iz];
 
-      for (let i = 0; i < totalCount; i++) {
-        const ix = i * 3;
-        const iy = i * 3 + 1;
-        const iz = i * 3 + 2;
+          const clockX = clockPos[ix];
+          const clockY = clockPos[iy];
+          const clockZ = clockPos[iz];
 
-        let originX = fromPos[ix];
-        let originY = fromPos[iy];
-        let originZ = fromPos[iz];
+          const nebX = nebulaPos[ix];
+          const nebY = nebulaPos[iy];
+          const nebZ = nebulaPos[iz];
 
-        if (scrollProgress < 0.1) {
-          originX += dispersionVector[ix] * currentHoverBurst;
-          originY += dispersionVector[iy] * currentHoverBurst;
-          originZ += dispersionVector[iz] * currentHoverBurst;
+          // 1. Saturn -> Octocat
+          const mid1X = saturnX + (catX - saturnX) * easeCat;
+          const mid1Y = saturnY + (catY - saturnY) * easeCat;
+          const mid1Z = saturnZ + (catZ - saturnZ) * easeCat;
+
+          // 2. Octocat -> Clock
+          const mid2X = mid1X + (clockX - mid1X) * easeClock;
+          const mid2Y = mid1Y + (clockY - mid1Y) * easeClock;
+          const mid2Z = mid1Z + (clockZ - mid1Z) * easeClock;
+
+          // 3. Clock -> Nebula Starfield Scatter
+          posArr[ix] = mid2X + (nebX - mid2X) * easeNebula;
+          posArr[iy] = mid2Y + (nebY - mid2Y) * easeNebula;
+          posArr[iz] = mid2Z + (nebZ - mid2Z) * easeNebula;
         }
 
-        posArr[ix] = originX + (toPos[ix] - originX) * ease;
-        posArr[iy] = originY + (toPos[iy] - originY) * ease;
-        posArr[iz] = originZ + (toPos[iz] - originZ) * ease;
+        posAttr.needsUpdate = true;
       }
 
-      posAttr.needsUpdate = true;
+      if (!isMounted) return;
 
-      renderer.render(scene, camera);
-      animationFrameId = requestAnimationFrame(animate);
+      try {
+        renderer.render(scene, camera);
+        animationFrameId = requestAnimationFrame(animate);
+      } catch (err) {
+        console.warn("WebGL render frame skipped:", err);
+      }
     };
 
     animate();
 
     return () => {
+      isMounted = false;
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
-      if (mount.contains(renderer.domElement)) {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+      if (mount && mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
       }
-      starGeo.dispose();
-      starMat.dispose();
-      particleGeo.dispose();
-      particleMat.dispose();
-      starCoreGeom.dispose();
-      starGlowGeom.dispose();
-      constellationStarMat.dispose();
-      constellationGlowMat.dispose();
-      constellationLineMat.dispose();
-      renderer.dispose();
+      try {
+        starGeo.dispose();
+        starMat.dispose();
+        cursorTrailGeo.dispose();
+        cursorTrailMat.dispose();
+        particleGeo.dispose();
+        particleMat.dispose();
+        renderer.dispose();
+      } catch (e) {
+        // Prevent disposal crash
+      }
     };
   }, []);
 
@@ -488,7 +568,7 @@ const GalaxyBackground = () => {
         position: "fixed",
         inset: 0,
         pointerEvents: "none",
-        zIndex: 0,
+        zIndex: 1,
         overflow: "hidden",
       }}
     />

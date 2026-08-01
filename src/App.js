@@ -4,20 +4,21 @@ import "./App.css";
 
 import HomePage from "./Pages/HomePage/HomePage";
 import EnrollPage from "./Pages/EnrollPage/EnrollPage";
-import EnrollPage1 from "./Pages/EnrollPage/EnrollPage1"
-import EnrollPage2 from "./Pages/EnrollPage/EnrollPage2"
-
-
+import EnrollPage1 from "./Pages/EnrollPage/EnrollPage1";
+import EnrollPage2 from "./Pages/EnrollPage/EnrollPage2";
+import GalaxyBackground from "./components/Home/GalaxyBackground";
 
 const App = () => {
-
-  return <div className="App">
-     <Switch>
-       <Route exact path="/" component={HomePage}/>
-       <Route exact path="/enrolled/successful" component={EnrollPage}/>
-       <Route exact path="/enrolled/existing" component={EnrollPage1}/>
-       <Route exact path="/enrolled/idnotfound" component={EnrollPage2}/>
-     </Switch>
-  </div>
-}
+  return (
+    <div className="App">
+      <GalaxyBackground />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/enrolled/successful" component={EnrollPage} />
+        <Route exact path="/enrolled/existing" component={EnrollPage1} />
+        <Route exact path="/enrolled/idnotfound" component={EnrollPage2} />
+      </Switch>
+    </div>
+  );
+};
 export default App;

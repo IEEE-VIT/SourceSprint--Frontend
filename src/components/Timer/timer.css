@@ -1,0 +1,106 @@
+.timer-container {
+  padding: 40px 20px 60px 20px;
+  position: relative;
+  z-index: 2;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+
+.timer-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  background: rgba(14, 11, 24, 0.75);
+  border: 1px solid rgba(232, 160, 69, 0.3);
+  border-radius: 20px;
+  padding: 32px 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(232, 160, 69, 0.12);
+}
+
+.timer-badge {
+  display: inline-block;
+  background: rgba(232, 160, 69, 0.15);
+  border: 1px solid rgba(232, 160, 69, 0.4);
+  color: #E8A045;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+
+.timer-heading {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+  letter-spacing: 1.5px;
+}
+
+.timer-boxes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.timer-box {
+  background: linear-gradient(145deg, rgba(28, 22, 44, 0.8) 0%, rgba(18, 14, 28, 0.9) 100%);
+  border: 1px solid rgba(232, 160, 69, 0.3);
+  border-radius: 14px;
+  padding: 16px 20px;
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.timer-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(232, 160, 69, 0.6);
+}
+
+.timer-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: #E8A045;
+  font-family: monospace;
+  line-height: 1.1;
+  text-shadow: 0 0 12px rgba(232, 160, 69, 0.4);
+}
+
+.timer-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.timer-colon {
+  font-size: 28px;
+  font-weight: 800;
+  color: #E8A045;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .timer-boxes {
+    gap: 8px;
+  }
+  .timer-box {
+    padding: 12px 14px;
+    min-width: 70px;
+  }
+  .timer-number {
+    font-size: 26px;
+  }
+  .timer-colon {
+    font-size: 20px;
+  }
+}

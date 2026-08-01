@@ -1,29 +1,25 @@
 import React from "react";
-import EnvelopeLogo from "../../assets/svg/register-svg/enroll-letter.svg";
-
 import "./enroll.css";
 
-// for new users - isExistingUser = false
-// for existing users - isExistingUser = true
-
 const Enroll = (props) => {
-  const message1 = "You are successfully enrolled";
-  const message2 = "Oh, I see you have already enrolled";
-  const message3 = "Sorry, your registration is not found. If you think this is wrong, please contact the organizers.";
+  const message1 = "You are successfully enrolled!";
+  const message2 = "You have already enrolled in SourceSprint!";
+  const message3 = "Registration not found. Please contact the event organizers.";
 
   return (
-    <div>
-      <div className="postregister-container">
-        <div className="postregister-middle">
-          <div className="message">
-            <h2>{props.idFound ? (props.isExistingUser ? message2 : message1): message3}</h2>
-            <h1>Good Luck Sprinting!</h1>
-            {/* Add website link to leaderboard here  */}
-            <a href={props.idFound? "../#leaderboard" : "../"}>
-              <button className="enroll-btn">{props.idFound? "Leaderboard" : "Home"}</button>
-            </a>
-          </div>
-        </div>
+    <div className="postregister-wrapper">
+      <div className="postregister-card">
+        <span className="postregister-badge">✦ SOURCESPRINT 2026 ✦</span>
+        <h2 className="postregister-title">
+          {props.idFound ? (props.isExistingUser ? message2 : message1) : message3}
+        </h2>
+        <h1 className="postregister-subtitle">GOOD LUCK SPRINTING!</h1>
+        <p className="postregister-text">
+          Get ready to master Git commands, master GitHub pull requests, and contribute to open-source projects.
+        </p>
+        <a href="/">
+          <button className="enroll-btn-sharp">RETURN HOME →</button>
+        </a>
       </div>
     </div>
   );
