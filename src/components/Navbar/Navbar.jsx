@@ -1,8 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./navbar.styles.css";
 
 
 const Navbar = () => {
+  const history = useHistory();
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
@@ -10,7 +12,7 @@ const Navbar = () => {
   };
 
   const handleRegister = () => {
-    alert("Registration opens soon!");
+    history.push("/register");
   };
   return (
     <nav className="navbar">
@@ -41,7 +43,7 @@ const Navbar = () => {
 
       <button
         className="navbar-register"
-        onClick={() => scrollTo("home")}
+        onClick={handleRegister}
       >
         REGISTER
       </button>

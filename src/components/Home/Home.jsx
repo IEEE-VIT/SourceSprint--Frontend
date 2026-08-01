@@ -9,7 +9,7 @@ const Home = () => {
   const history = useHistory();
 
   const handleRegisterClick = () => {
-    history.push("/enrolled/successful");
+    history.push("/register");
   };
 
   const handleScheduleClick = () => {
