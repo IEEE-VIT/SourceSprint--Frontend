@@ -33,6 +33,9 @@ const Navbar = () => {
         <button onClick={() => scrollTo("sprint")}>
           Contribute
         </button>
+        <button onClick={() => (window.location.href = "/leaderboard")}>
+          Leaderboard
+        </button>
       </div>
 
       <button

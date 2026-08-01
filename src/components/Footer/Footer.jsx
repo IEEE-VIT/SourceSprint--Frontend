@@ -2,7 +2,6 @@ import React from "react";
 
 import "./footer.css";
 
-import IEEELogo from "../../assets/svg/footer-svg/IEEELoog-Black.svg";
 import SourceSprint from "../../assets/svg/footer-svg/sourcesprint-logo.png";
 import FacebookIcon from "../../assets/svg/footer-svg/facebook.svg";
 import LinkedInIcon from "../../assets/svg/footer-svg/linkedIn.svg";
@@ -41,12 +40,7 @@ const Footer = (props) => {
       </div>
 
       <div className="footer-2-container-lg">
-        <LinkImage
-          link={"https://ieeevit.org/"}
-          img={IEEELogo}
-          link_class={"footer-link"}
-          img_class={"footer-2-lg-grid1"}
-        />
+        <div className="footer-spacer"></div>
 
         <div className="footer-2-lg-grid2">
           <h1 className="footer-2-heading">CONTACT US</h1>
@@ -97,12 +91,7 @@ const Footer = (props) => {
 
       <div className="footer-2-container-sm">
         <div className="footer-2-sm-grid1">
-          <LinkImage
-            link={"https://ieeevit.org/"}
-            img={IEEELogo}
-            link_class={"footer-link"}
-            img_class={"footer-2-sm-img footer-2-sm-img2"}
-          />
+
           <LinkImage
             link={""}
             img={SourceSprint}

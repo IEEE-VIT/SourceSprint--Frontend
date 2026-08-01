@@ -57,7 +57,7 @@
 /* Paragraph Subtext */
 .hero-description {
   color: #cccccc;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   max-width: 650px;
   margin: 0 auto 35px auto;
@@ -82,9 +82,49 @@
   justify-content: center;
   align-items: center;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
+  border-radius: 30px;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #e8a045, #d4883b);
+  color: #22140f;
+  border: none;
+  box-shadow: 0 4px 15px rgba(232, 160, 69, 0.25);
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #f2b76c, #df9547);
+  box-shadow: 0 8px 25px rgba(232, 160, 69, 0.45);
+}
+
+.primary-btn:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 2px 8px rgba(232, 160, 69, 0.2);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+  border: 2px solid #e8a045;
+  backdrop-filter: blur(5px);
+}
+
+.secondary-btn:hover {
+  transform: translateY(-3px);
+  background: #e8a045;
+  color: #22140f;
+  box-shadow: 0 8px 25px rgba(232, 160, 69, 0.35);
+}
+
+.secondary-btn:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 2px 8px rgba(232, 160, 69, 0.15);
 }
 
 @media (max-width: 768px) {

@@ -45,6 +45,7 @@
 
 .contestent-name {
   font-weight: 500;
+  font-size: 17px;
   color: var(--text-secondary);
   padding-left: 10px;
 }

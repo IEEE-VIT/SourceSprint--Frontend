@@ -9,27 +9,16 @@ const Navbar = () => {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">
-        <img src={NavLogo} alt="" className="nav-logo" />
+        <img src={NavLogo} alt="" className="navbar-logo" />
       </Link>
 
-      <div className="nav-links">
-        <div>
-          <a href="../#about">About</a>
-        </div>
-        <div>
-          <a href="../#instructions">Instructions</a>
-        </div>
-        <div>
-          <a href="../#leaderboard">Leaderboard</a>
-        </div>
+      <div className="navbar-links">
+        <a href="../#about">About</a>
+        <a href="../#instructions">Instructions</a>
+        <a href="../#leaderboard">Leaderboard</a>
       </div>
-      {/* <Link to="/register">
-        <button className="nav-btn" type="button">
-          REGISTER
-        </button>
-      </Link> */}
       <div>{/* <Timer expiryTimestamp={time} /> */}</div>
     </nav>
   );

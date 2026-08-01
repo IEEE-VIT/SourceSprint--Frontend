@@ -16,8 +16,10 @@
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.4",
     "react-timer-hook": "^3.0.5",
+    "react-tsparticles": "^2.12.2",
     "three": "^0.158.0",
     "three-stdlib": "^2.36.1",
+    "tsparticles": "^4.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

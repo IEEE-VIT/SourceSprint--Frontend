@@ -29,7 +29,7 @@ const GalaxyBackground = () => {
     const starColors = new Float32Array(starCount * 3);
 
     const colorBlue = new THREE.Color("#4b7bec");
-    const colorGold = new THREE.Color("#f6b36a");
+    const colorGold = new THREE.Color("#00F5FF");
     const colorWhite = new THREE.Color("#ffffff");
 
     for (let i = 0; i < starCount; i++) {
@@ -71,8 +71,8 @@ const GalaxyBackground = () => {
     const particleColors = new Float32Array(totalCount * 3);
     const dispersionVector = new Float32Array(totalCount * 3);
 
-    const amber = new THREE.Color("#f6b36a");
-    const gold = new THREE.Color("#d4883b");
+    const amber = new THREE.Color("#00F5FF");
+    const gold = new THREE.Color("#9D4EDD");
 
     // --- 4. Official Vector GitHub Logo Path ---
     const githubSvgString = `

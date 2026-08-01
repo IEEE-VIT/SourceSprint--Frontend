@@ -96,7 +96,7 @@
   background: rgba(212, 136, 59, 0.12);
   border: 1px solid rgba(212, 136, 59, 0.35);
   color: #f6b36a;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 20px;
@@ -112,7 +112,7 @@
 }
 
 .timeline-card-description {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--text-muted);
   margin: 0;

@@ -19,16 +19,16 @@ const HomePage = () => {
         <Navbar />
       </div>
       <div className="content">
-        <Route exact to="/home" component={Home}/>
-        <Route exact to="/about" component={About}/>
-        <Route exact to="/sponsor" component={Sponsor}/>
-        <Route exact to="/timeline" component={Timeline}/>
-        <Route exact to="/instructions" component={InstructionsSet}/>
-        <Route exact to="/coffee" component={Coffee}/>
-        <Route exact to="/sprint" component={Sprint}/>
-        <Route exact to="/faq" component={FAQ}/>
-        <Route exact to="/leaderboard" component={LeaderBoard}/>
-        <Route exact to="/footer" component={Footer}/>
+        <Route exact to="/home" component={Home} />
+        <Route exact to="/about" component={About} />
+        <Route exact to="/sponsor" component={Sponsor} />
+        <Route exact to="/timeline" component={Timeline} />
+        <Route exact to="/instructions" component={InstructionsSet} />
+        <Route exact to="/coffee" component={Coffee} />
+        <Route exact to="/sprint" component={Sprint} />
+        <Route exact to="/faq" component={FAQ} />
+
+        <Route exact to="/footer" component={Footer} />
       </div>
     </div>
   );

@@ -28,16 +28,27 @@
     width: 100%;
     text-align: left;
     cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px 20px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .faq-question:hover {
+    color: #f6b36a;
+    background: rgba(255, 255, 255, 0.03);
   }
   
   .faq-answer {
     display: none;
-    padding: 10px;
+    padding: 15px 20px;
     background-color: white; /* Set background color to white */
     border: 1px solid #ddd;
     border-top: none;
     border-radius: 0 0 10px 10px;
     color: black; /* Add rounded corners to the bottom */
+    font-size: 16px;
+    line-height: 1.6;
   }
   
   .faq-item.expanded .faq-answer {
