@@ -3,9 +3,9 @@
 .reg-page{
   --bg-top:#0a0e1f;
   --bg-bottom:#05060f;
-  --orange:#f2a341;
-  --orange-dark:#c97b2b;
-  --orange-light:#ffd9a0;
+  --orange:#E8A045;
+  --orange-dark:#d4883b;
+  --orange-light:#f0b057;
   --panel:rgba(255,255,255,0.04);
   --panel-border:rgba(255,255,255,0.10);
   --text-dim:#9aa1b5;

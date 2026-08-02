@@ -33,7 +33,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-links">
-        <button onClick={() => scrollTo("leaderboard")}>
+        <button onClick={() => history.push("/leaderboard")}>
           Leaderboard
         </button>
 

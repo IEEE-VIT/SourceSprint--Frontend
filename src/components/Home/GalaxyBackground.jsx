@@ -155,7 +155,7 @@ const GalaxyBackground = () => {
         svgData.paths.forEach((path) => {
           const shapes = SVGLoader.createShapes(path);
           shapes.forEach((shape) => {
-            const points = shape.getSpacedPoints(1800);
+            const points = shape.getSpacedPoints(260);
             points.forEach((pt) => {
               const nx = ((pt.x - 50) / 50) * 1.85;
               const ny = -((pt.y - 50) / 50) * 1.85;
@@ -231,55 +231,53 @@ const GalaxyBackground = () => {
       if (i < 1300) {
         // 1. Outer Concentric Ring
         const angle = Math.random() * Math.PI * 2;
-        const r = 2.15 + (Math.random() - 0.5) * 0.05;
+        const r = 2.15 + (Math.random() - 0.5) * 0.07;
         gitCatPos[i * 3] = Math.cos(angle) * r;
         gitCatPos[i * 3 + 1] = Math.sin(angle) * r;
-        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.07;
       } else if (i < 2500) {
         // 2. Inner Concentric Ring
         const angle = Math.random() * Math.PI * 2;
-        const r = 1.55 + (Math.random() - 0.5) * 0.05;
+        const r = 1.55 + (Math.random() - 0.5) * 0.07;
         gitCatPos[i * 3] = Math.cos(angle) * r;
         gitCatPos[i * 3 + 1] = Math.sin(angle) * r;
-        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.07;
       } else {
         // 3. Centered GitHub Octocat Silhouette
         const catPt = sampledCatPoints[i % sampledCatPoints.length] || { x: 0, y: 0 };
         const scaleCat = 0.65;
-        gitCatPos[i * 3] = catPt.x * scaleCat + (Math.random() - 0.5) * 0.02;
-        gitCatPos[i * 3 + 1] = catPt.y * scaleCat + (Math.random() - 0.5) * 0.02;
-        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
+        gitCatPos[i * 3] = catPt.x * scaleCat + (Math.random() - 0.5) * 0.12;
+        gitCatPos[i * 3 + 1] = catPt.y * scaleCat + (Math.random() - 0.5) * 0.12;
+        gitCatPos[i * 3 + 2] = (Math.random() - 0.5) * 0.07;
       }
 
       // CLOCK SILHOUETTE TARGETS (Matching user's clock image)
-      let cx = 0, cy = 0, cz = (Math.random() - 0.5) * 0.08;
+      let cx = 0, cy = 0, cz = (Math.random() - 0.5) * 0.16;
 
       if (i < 2600) {
-        // Outer Circle Ring
+        // Outer Circle Ring (stationary)
         const angle = Math.random() * Math.PI * 2;
-        const r = 1.65 + (Math.random() - 0.5) * 0.06;
+        const r = 1.65 + (Math.random() - 0.5) * 0.075;
         cx = Math.cos(angle) * r;
         cy = Math.sin(angle) * r;
       } else if (i < 3400) {
-        // 12 Tick Marks on the perimeter
+        // 12 Tick Marks on the perimeter (stationary)
         const tickIndex = Math.floor(Math.random() * 12);
         const tickAngle = (tickIndex * Math.PI) / 6;
-        const t = Math.random() * 0.22;
+        const t = Math.random() * 0.19;
         const r = 1.65 - t;
         cx = Math.cos(tickAngle) * r;
         cy = Math.sin(tickAngle) * r;
       } else if (i < 3800) {
-        // Minute Hand pointing straight UP to 12:00
+        // Seconds hand (visually longer) - canonical template pointing up, rotated live from real time
         const t = Math.random();
-        cx = (Math.random() - 0.5) * 0.04;
+        cx = (Math.random() - 0.5) * 0.05;
         cy = t * 1.15;
       } else {
-        // Hour Hand pointing Down-Right to 4:00 (angle ~ -30 deg)
+        // Minutes hand (visually shorter) - canonical template pointing up, rotated live from real time
         const t = Math.random();
-        const hourAngle = -Math.PI / 6;
-        const r = t * 0.85;
-        cx = Math.cos(hourAngle) * r + (Math.random() - 0.5) * 0.03;
-        cy = Math.sin(hourAngle) * r + (Math.random() - 0.5) * 0.03;
+        cx = (Math.random() - 0.5) * 0.036;
+        cy = t * 0.85;
       }
 
       clockPos[i * 3] = cx;
@@ -349,10 +347,9 @@ const GalaxyBackground = () => {
       }
       cursorIndex = (cursorIndex + 3) % cursorTrailCount;
 
-      const targetXPos = width > 768 ? 0.35 : 0;
-      const dx = mouse.targetX - targetXPos;
-      const dy = mouse.targetY;
-      mouse.isHovered = Math.sqrt(dx * dx + dy * dy) < 0.55;
+      const wdx = pos.x - objectGroup.position.x;
+      const wdy = pos.y - objectGroup.position.y;
+      mouse.isHovered = Math.sqrt(wdx * wdx + wdy * wdy) < 1.6;
     };
     window.addEventListener("pointermove", handlePointerMove);
 
@@ -373,6 +370,8 @@ const GalaxyBackground = () => {
     let rotX = 0;
     let rotY = 0;
     let currentHoverBurst = 0;
+    let outerRingAngle = 0;
+    let innerRingAngle = 0;
 
     const animate = () => {
       mouse.x += (mouse.targetX - mouse.x) * 0.04;
@@ -438,9 +437,18 @@ const GalaxyBackground = () => {
         clockToNebulaProgress = Math.min(Math.max((startNebulaY - resourcesTop) / (startNebulaY - endNebulaY), 0), 1);
       }
 
-      // Hover expansion factor (active only near top of page)
-      const targetHoverBurst = mouse.isHovered && saturnToCatProgress < 0.1 ? 0.35 : 0.0;
+      // Hover expansion factor (active across Saturn, Octocat & Clock states)
+      const targetHoverBurst = mouse.isHovered && clockToNebulaProgress < 0.5 ? 0.35 : 0.0;
       currentHoverBurst += (targetHoverBurst - currentHoverBurst) * 0.15;
+
+      // Independent counter-rotation for the two concentric octocat rings (silhouette stays stationary)
+      outerRingAngle += 0.003;
+      innerRingAngle -= 0.004;
+
+      // Live-ticking clock hands driven by real time (floored per-second for a "ticking" motion)
+      const nowSeconds = Math.floor(Date.now() / 1000);
+      const secAngle = -(nowSeconds % 60) * ((Math.PI * 2) / 60);
+      const minAngle = -(Math.floor(nowSeconds / 60) % 60) * ((Math.PI * 2) / 60);
 
       // Smoothly un-tilt Saturn to 0 so the GitHub Octocat logo is 100% perfectly straight & upright
       const initialSaturnTiltZ = Math.PI / 6;
@@ -485,13 +493,45 @@ const GalaxyBackground = () => {
           const saturnY = saturnPos[iy] + dispersionVector[iy] * currentHoverBurst;
           const saturnZ = saturnPos[iz] + dispersionVector[iz] * currentHoverBurst;
 
-          const catX = gitCatPos[ix];
-          const catY = gitCatPos[iy];
-          const catZ = gitCatPos[iz];
+          let catX = gitCatPos[ix];
+          let catY = gitCatPos[iy];
+          const catZ = gitCatPos[iz] + dispersionVector[iz] * currentHoverBurst;
 
-          const clockX = clockPos[ix];
-          const clockY = clockPos[iy];
-          const clockZ = clockPos[iz];
+          if (i < 1300) {
+            const cos = Math.cos(outerRingAngle);
+            const sin = Math.sin(outerRingAngle);
+            const rx = catX, ry = catY;
+            catX = rx * cos - ry * sin;
+            catY = rx * sin + ry * cos;
+          } else if (i < 2500) {
+            const cos = Math.cos(innerRingAngle);
+            const sin = Math.sin(innerRingAngle);
+            const rx = catX, ry = catY;
+            catX = rx * cos - ry * sin;
+            catY = rx * sin + ry * cos;
+          }
+          catX += dispersionVector[ix] * currentHoverBurst;
+          catY += dispersionVector[iy] * currentHoverBurst;
+
+          let clockX = clockPos[ix];
+          let clockY = clockPos[iy];
+          const clockZ = clockPos[iz] + dispersionVector[iz] * currentHoverBurst;
+
+          if (i >= 3400 && i < 3800) {
+            const cos = Math.cos(secAngle);
+            const sin = Math.sin(secAngle);
+            const rx = clockX, ry = clockY;
+            clockX = rx * cos - ry * sin;
+            clockY = rx * sin + ry * cos;
+          } else if (i >= 3800) {
+            const cos = Math.cos(minAngle);
+            const sin = Math.sin(minAngle);
+            const rx = clockX, ry = clockY;
+            clockX = rx * cos - ry * sin;
+            clockY = rx * sin + ry * cos;
+          }
+          clockX += dispersionVector[ix] * currentHoverBurst;
+          clockY += dispersionVector[iy] * currentHoverBurst;
 
           const nebX = nebulaPos[ix];
           const nebY = nebulaPos[iy];

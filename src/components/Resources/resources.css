@@ -1,5 +1,5 @@
 .resources-section {
-  padding: 60px 20px 100px 20px;
+  padding: 140px 20px 100px 20px;
   background: transparent;
   color: #ffffff;
   font-family: "Inter", sans-serif;
@@ -68,9 +68,9 @@
 
 /* Download Git Bash Card */
 .git-bash-download-card {
-  background: rgba(15, 23, 42, 0.25);
-  border: var(--border-gold);
-  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(212, 136, 59, 0.25);
+  border-radius: 12px;
   padding: 36px;
   margin-bottom: 50px;
   position: relative;
@@ -125,7 +125,7 @@
 .download-git-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(252, 174, 105, 0.4);
-  background: #fcae69;
+  background: #E8A045;
   color: #120e1c;
   border-color: transparent;
 }
@@ -138,9 +138,9 @@
 }
 
 .command-card {
-  background: var(--bg-glass-base);
-  border: var(--border-gold);
-  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(212, 136, 59, 0.25);
+  border-radius: 12px;
   padding: 24px;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: var(--backdrop-blur);
@@ -233,7 +233,7 @@
 .command-code code {
   font-family: "Fira Code", "Courier New", Courier, monospace;
   font-size: 13px;
-  color: #f6b36a;
+  color: #E8A045;
   line-height: 1.55;
 }
 

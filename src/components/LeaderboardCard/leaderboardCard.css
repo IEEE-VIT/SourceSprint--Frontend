@@ -8,18 +8,36 @@
   align-items: center;
   text-align: center;
   align-content: center;
-  margin: 12px 20vw;
+  margin: 12px 12%;
   backdrop-filter: var(--backdrop-blur);
   -webkit-backdrop-filter: var(--backdrop-blur);
   color: var(--text-secondary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  user-select: none;
 }
 
 .leaderboardcard-container:hover {
   border: var(--border-gold-hover);
   box-shadow: var(--glow-gold-hover);
   transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.leaderboardcard-container:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.leaderboardcard-container:focus-visible {
+  outline: 2px solid #E8A045;
+  outline-offset: 2px;
+}
+
+.leaderboardcard-container.selected {
+  background: rgba(232, 160, 69, 0.12);
+  border: var(--border-gold-hover);
+  box-shadow: var(--glow-gold-hover);
   color: var(--text-primary);
 }
 
@@ -51,7 +69,7 @@
 
 .leaderboardcard-rank {
   font-weight: 700;
-  color: #f6b36a;
+  color: #E8A045;
   font-size: 18px;
 }
 
@@ -61,17 +79,110 @@
   font-size: 18px;
 }
 
+/* Top 3 get a visually bigger, more distinct treatment */
+.leaderboardcard-container.top-rank {
+  padding: 20px 28px;
+  transform: scale(1.03);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.4);
+}
+
+.leaderboardcard-container.top-rank:hover {
+  transform: scale(1.03) translateY(-2px);
+}
+
+.leaderboardcard-container.top-rank:active {
+  transform: scale(1.01);
+}
+
+.leaderboardcard-container.top-rank .leaderboardcard-rank {
+  font-size: 26px;
+}
+
+.leaderboardcard-container.top-rank .contestant-icon img {
+  width: 42px;
+  height: 42px;
+}
+
+.leaderboardcard-container.top-rank .contestent-name {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.leaderboardcard-container.top-rank .leaderboard-score {
+  font-size: 22px;
+}
+
+.leaderboardcard-container.rank-1 {
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.25);
+}
+
+.leaderboardcard-container.rank-1 .leaderboardcard-rank {
+  color: #ffd700;
+  font-size: 30px;
+}
+
+.leaderboardcard-container.rank-2 {
+  border: 1px solid rgba(192, 192, 192, 0.6);
+  box-shadow: 0 0 18px rgba(192, 192, 192, 0.2);
+}
+
+.leaderboardcard-container.rank-2 .leaderboardcard-rank {
+  color: #c0c0c0;
+}
+
+.leaderboardcard-container.rank-3 {
+  border: 1px solid rgba(205, 127, 50, 0.6);
+  box-shadow: 0 0 18px rgba(205, 127, 50, 0.2);
+}
+
+.leaderboardcard-container.rank-3 .leaderboardcard-rank {
+  color: #cd7f32;
+}
+
+@media (max-width: 640px) {
+  .leaderboardcard-container.top-rank {
+    padding: 14px 16px;
+    transform: none;
+  }
+
+  .leaderboardcard-container.top-rank:hover {
+    transform: translateY(-2px);
+  }
+
+  .leaderboardcard-container.top-rank .leaderboardcard-rank {
+    font-size: 18px;
+  }
+
+  .leaderboardcard-container.rank-1 .leaderboardcard-rank {
+    font-size: 20px;
+  }
+
+  .leaderboardcard-container.top-rank .contestant-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .leaderboardcard-container.top-rank .contestent-name {
+    font-size: 13px;
+  }
+
+  .leaderboardcard-container.top-rank .leaderboard-score {
+    font-size: 16px;
+  }
+}
+
 /* Mobile devices */
 @media (max-width: 768px) {
   .leaderboardcard-container {
-    margin: 12px 5vw;
+    margin: 12px 4%;
   }
 }
 
 @media (max-width: 640px) {
   .leaderboardcard-container {
     grid-template-columns: 15% 70% 15%;
-    margin: 10px 2vw;
+    margin: 10px 1%;
     padding: 8px 12px;
   }
   

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './faq.css';
 
 function FAQ() {
-  const categories = ["All", "Git & GitHub", "Sprint & PRs", "General"];
+  const categories = ["General", "Git & GitHub", "Sprint & PRs"];
 
   const faqs = [
     {
@@ -13,7 +13,7 @@ function FAQ() {
     {
       category: "General",
       question: 'Why should I contribute to open source projects?',
-      answer: 'Contributing helps you gain real-world collaborative experience, master Git and GitHub workflows, improve your resume, build a strong public code portfolio, and connect with developers worldwide.',
+      answer: 'Contributing helps you gain real world collaborative experience, master Git and GitHub workflows, improve your resume, build a strong public code portfolio, and connect with developers worldwide.',
     },
     {
       category: "Sprint & PRs",
@@ -22,8 +22,8 @@ function FAQ() {
     },
     {
       category: "Sprint & PRs",
-      question: 'How do I find beginner-friendly issues at SourceSprint?',
-      answer: 'During SourceSprint, curated repositories will feature labeled issues such as "good-first-issue" or "sourcesprint". Check the event dashboard for active project links.',
+      question: 'How do I find beginner friendly issues at SourceSprint?',
+      answer: 'During SourceSprint, curated repositories will feature labeled issues such as "good first issue" or "sourcesprint". Check the event dashboard for active project links.',
     },
     {
       category: "General",
@@ -33,7 +33,7 @@ function FAQ() {
     {
       category: "Git & GitHub",
       question: 'What is the difference between Git and GitHub?',
-      answer: 'Git is the local command-line version control system installed on your computer. GitHub is the cloud-based web platform that hosts Git repositories online and manages team collaboration.',
+      answer: 'Git is the local command line version control system installed on your computer. GitHub is the cloud based web platform that hosts Git repositories online and manages team collaboration.',
     },
     {
       category: "Sprint & PRs",
@@ -47,12 +47,10 @@ function FAQ() {
     },
   ];
 
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("General");
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const filteredFaqs = activeCategory === "All"
-    ? faqs
-    : faqs.filter(faq => faq.category === activeCategory);
+  const filteredFaqs = faqs.filter(faq => faq.category === activeCategory);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../Navbar/Navbar";
 import "./resources.css";
 
 const gitCommands = [
@@ -50,7 +51,9 @@ const Resources = () => {
   };
 
   return (
-    <section id="resources" className="resources-section">
+    <>
+      <Navbar />
+      <section id="resources" className="resources-section">
       <div className="resources-container">
         {/* Page Main Header */}
         <div className="resources-header">
@@ -113,7 +116,8 @@ const Resources = () => {
           ))}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 

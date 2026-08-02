@@ -98,14 +98,15 @@
 }
 
 .faq-card {
-  background: rgba(18, 14, 28, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(212, 136, 59, 0.25);
+  border-radius: 12px;
   padding: 20px 24px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -122,15 +123,15 @@
 }
 
 .faq-card:hover {
-  background: rgba(26, 20, 40, 0.85);
-  border-color: rgba(232, 160, 69, 0.35);
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(246, 179, 106, 0.6);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 15px rgba(232, 160, 69, 0.1);
 }
 
 .faq-card.open {
-  background: rgba(28, 22, 44, 0.9);
-  border-color: rgba(232, 160, 69, 0.5);
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(246, 179, 106, 0.6);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(232, 160, 69, 0.15);
 }
 
@@ -239,15 +240,16 @@
 /* Community Support CTA Box */
 .faq-cta-box {
   margin-top: 50px;
-  background: linear-gradient(135deg, rgba(28, 22, 44, 0.8) 0%, rgba(18, 14, 28, 0.8) 100%);
-  border: 1px solid rgba(232, 160, 69, 0.3);
-  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(212, 136, 59, 0.25);
+  border-radius: 12px;
   padding: 28px 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 
 .faq-cta-text {

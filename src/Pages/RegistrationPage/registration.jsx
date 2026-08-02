@@ -180,7 +180,7 @@ export default function RegistrationPage() {
         <div className="form-wrapper">
           <div className="page-heading">
             <h1>REGISTER</h1>
-            <p>Secure your spot at SourceSprint — sprint into open source.</p>
+            <p>Secure your spot at SourceSprint, sprint into open source.</p>
           </div>
 
           <div className="card">
@@ -233,7 +233,7 @@ export default function RegistrationPage() {
             ) : (
               <div className="success">
                 <div className="check-circle">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#f2a341" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#E8A045" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>

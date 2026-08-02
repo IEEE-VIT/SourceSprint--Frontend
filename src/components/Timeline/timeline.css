@@ -21,10 +21,11 @@
 
 .timeline-hr {
   border: none;
-  height: 3px;
-  background: var(--underline-gradient);
+  height: 4px;
+  background: linear-gradient(90deg, #E8A045, #d4883b);
   margin: 0 auto 60px auto;
-  width: 150px;
+  width: 100px;
+  border-radius: 2px;
 }
 
 .timeline-wrapper {
@@ -60,7 +61,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #f6b36a;
+  background: #E8A045;
   border: 2px solid #000315;
   box-shadow: 0 0 10px rgba(246, 179, 106, 0.8);
   z-index: 2;
@@ -74,7 +75,7 @@
 }
 
 .timeline-card {
-  background: var(--bg-glass-base);
+  background: rgba(15, 23, 42, 0.05);
   border: var(--border-gold);
   border-radius: 12px;
   padding: 24px;
@@ -95,7 +96,7 @@
   display: inline-block;
   background: rgba(212, 136, 59, 0.12);
   border: 1px solid rgba(212, 136, 59, 0.35);
-  color: #f6b36a;
+  color: #E8A045;
   font-size: 13px;
   font-weight: 600;
   padding: 4px 12px;

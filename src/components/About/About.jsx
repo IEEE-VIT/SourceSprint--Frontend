@@ -6,7 +6,6 @@ const About = () => {
     <div id="about" className="about-section">
       <div className="about-container">
         <div className="about-content">
-          <span className="about-badge">ABOUT THE EVENT</span>
           <h1 className="about-text-heading">About SourceSprint</h1>
           <hr className="about-hr"/>
           <p className="about-description">

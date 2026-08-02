@@ -8,7 +8,7 @@ function Sprint() {
       {/* Sprint component with image on the right */}
       <div className="sprint-container">
         <div className="sprint-text-content">
-          <h2>SourceSprint - Competition</h2>
+          <h2>SourceSprint Competition</h2>
           <p>After a thrilling speaker session, get ready to merge PRs and solve issues!
 Choose issues from projects of various domains.
 Each time your PR gets merged, you get points</p>
