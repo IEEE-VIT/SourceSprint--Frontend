@@ -44,14 +44,13 @@
   margin-bottom:36px;
 }
 .reg-page .page-heading h1{
-  font-family:'Archivo Black', sans-serif;
-  font-size:44px;
-  letter-spacing:1px;
-  background:linear-gradient(180deg,#ffe2ab 0%, var(--orange) 55%, var(--orange-dark) 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  filter:drop-shadow(0 4px 18px rgba(242,163,65,0.25));
+  font-family:'Poppins', sans-serif;
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  color:#ffffff;
+  margin:0;
+  text-transform:uppercase;
 }
 .reg-page .page-heading p{
   color:var(--text-dim);
@@ -138,6 +137,69 @@
 }
 .reg-page .submit-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(242,163,65,0.35);}
 .reg-page .submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Error Card styling */
+.reg-page .error-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(224, 82, 77, 0.08);
+  border: 1px solid rgba(224, 82, 77, 0.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 20px;
+  box-shadow: 0 4px 20px rgba(224, 82, 77, 0.05);
+  animation: regErrorIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes regErrorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reg-page .error-icon {
+  width: 20px;
+  height: 20px;
+  color: #e0524d;
+  flex-shrink: 0;
+}
+
+.reg-page .error-text {
+  color: #f7a3a0;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.reg-page .error-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.reg-page .error-action-link {
+  color: var(--orange-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.reg-page .error-action-link:hover {
+  color: var(--orange);
+  transform: translateX(3px);
+}
 
 /* success state */
 .reg-page .success{

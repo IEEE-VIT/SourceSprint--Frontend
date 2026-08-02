@@ -11,6 +11,11 @@ const Home = () => {
     history.push("/register");
   };
 
+  const handleGithubLogin = () => {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+    window.location.href = `${backendUrl}/github/login`;
+  };
+
   return (
     <section id="home" className="home-container">
       <div className="hero-content">
@@ -28,6 +33,9 @@ const Home = () => {
         <div className="hero-buttons">
           <button className="primary-btn-sharp" onClick={handleRegisterClick}>
             REGISTER NOW &gt;
+          </button>
+          <button className="secondary-btn-sharp" onClick={handleGithubLogin}>
+            LOGIN WITH GITHUB &gt;
           </button>
         </div>
       </div>

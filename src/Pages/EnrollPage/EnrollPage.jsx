@@ -1,6 +1,6 @@
 import React from "react";
 
-import NavbarEnroll from "../../components/Navbar/Navbar-enroll";
+import Navbar from "../../components/Navbar/Navbar";
 import Enroll from "../../components/Enroll/Enroll";
 
 // for new users - passing isExistingUser = false
@@ -8,11 +8,11 @@ import Enroll from "../../components/Enroll/Enroll";
 const EnrollPage = () => {
   localStorage.setItem("loggedIn", false);
   return (
-    <div className="enroll-container">
-      <div className="navbar">
-        <NavbarEnroll />
+    <div className="App">
+      <div className="navbar-wrapper">
+        <Navbar />
       </div>
-      <div className="enroll-text-container">
+      <div className="content" style={{ paddingTop: "120px" }}>
         <Enroll idFound={true} isExistingUser={false} />
       </div>
     </div>

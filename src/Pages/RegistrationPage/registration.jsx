@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './registration.css';
 
 const validators = {
@@ -29,18 +30,50 @@ export default function RegistrationPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setApiError('');
   };
 
   const handleBlur = (e) => {
     setTouched((prev) => ({ ...prev, [e.target.name]: true }));
   };
 
+  const [apiError, setApiError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setTouched({ name: true, github: true, regno: true, email: true });
     if (!isFormValid) return;
-    // TODO: send formData to your backend / API / Google Sheet / DB here
-    setSubmitted(true);
+
+    setLoading(true);
+    setApiError('');
+
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+    axios.post(`${backendUrl}/register/new`, {
+      name: formData.name,
+      email: formData.email,
+      phone: '0000000000', // Default fallback as backend schema requires a phone number
+      vit: 'yes' // Default fallback to satisfy backend schema enum requirement
+    })
+    .then((response) => {
+      setLoading(false);
+      const data = response.data;
+      
+      if (data.isNotParticipant === true || data.msg === 'User is not a participant') {
+        setApiError('This email is not registered in our participant list. Please use the email you used to register for SourceSprint.');
+      } else if (data.msg === 'User already exists') {
+        setApiError('You have already registered for SourceSprint! You can proceed to log in with GitHub.');
+      } else if (data.error) {
+        setApiError('An error occurred. Please check your connection and try again.');
+      } else {
+        setSubmitted(true);
+      }
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.error('Registration failed:', error);
+      setApiError('An error occurred. Please check your connection and try again.');
+    });
   };
 
   /* ---------------- Starfield background (canvas) ---------------- */
@@ -226,9 +259,30 @@ export default function RegistrationPage() {
                   <div className="error-msg">{errorMessages.email}</div>
                 </div>
 
-                <button type="submit" className="submit-btn" disabled={!isFormValid}>
-                  Register Now
+                <button type="submit" className="submit-btn" disabled={!isFormValid || loading}>
+                  {loading ? 'Registering...' : 'Register Now'}
                 </button>
+
+                {apiError && (
+                  <div className="error-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="error-icon">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <div className="error-content-wrapper">
+                      <span className="error-text">{apiError}</span>
+                      {apiError.includes('already registered') && (
+                        <a 
+                          href={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000'}/github/login`}
+                          className="error-action-link"
+                        >
+                          Log in with GitHub →
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
               </form>
             ) : (
               <div className="success">
@@ -238,7 +292,7 @@ export default function RegistrationPage() {
                   </svg>
                 </div>
                 <h2>Registered!</h2>
-                <p>Thanks for registering for SourceSprint 🎉<br />Check your email for confirmation and next steps.</p>
+                <p>Thanks for registering for SourceSprint 🎉<br />You can now return home and log in with GitHub to start tracking your progress.</p>
                 <Link to="/" className="back-btn">Back to Home</Link>
               </div>
             )}

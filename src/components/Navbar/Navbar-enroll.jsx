@@ -1,36 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import "./navbar.styles.css";
-import NavLogo from "../../assets/svg/navbar-svg/navbar-logo.svg";
-
 
 const Navbar = () => {
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
+  const history = useHistory();
   return (
-    <nav>
-      <Link to="/">
-        <img src={NavLogo} alt="" className="nav-logo" />
-      </Link>
-
-      <div className="nav-links">
-        <div>
-          <a href="../#about">About</a>
-        </div>
-        <div>
-          <a href="../#instructions">Instructions</a>
-        </div>
-        <div>
-          <a href="../#leaderboard">Leaderboard</a>
-        </div>
+    <nav className="navbar">
+      <div
+        className="navbar-logo"
+        onClick={() => history.push("/")}
+      >
+        SOURCESPRINT
       </div>
-      {/* <Link to="/register">
-        <button className="nav-btn" type="button">
-          REGISTER
+
+      <div className="navbar-links">
+        <button onClick={() => history.push("/")}>
+          Home
         </button>
-      </Link> */}
-      <div>{/* <Timer expiryTimestamp={time} /> */}</div>
+        <button onClick={() => history.push("/leaderboard")}>
+          Leaderboard
+        </button>
+        <button onClick={() => history.push("/resources")}>
+          Resources
+        </button>
+      </div>
     </nav>
   );
 };

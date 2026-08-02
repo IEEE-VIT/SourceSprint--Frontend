@@ -9,73 +9,146 @@
 }
 
 .postregister-card {
-  background: rgba(18, 14, 28, 0.85);
-  border: 1px solid rgba(232, 160, 69, 0.35);
-  border-radius: 20px;
-  padding: 50px 40px;
-  max-width: 580px;
+  background: linear-gradient(135deg, rgba(22, 17, 36, 0.45) 0%, rgba(10, 8, 18, 0.45) 100%);
+  border: 1px solid rgba(232, 160, 69, 0.2);
+  border-radius: 24px;
+  padding: 38px 32px;
+  max-width: 440px;
   width: 100%;
   text-align: center;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(232, 160, 69, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.7), 
+    0 0 40px rgba(232, 160, 69, 0.08), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postregister-card:hover {
+  border-color: rgba(232, 160, 69, 0.35);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.8), 
+    0 0 50px rgba(232, 160, 69, 0.15), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.status-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 24px auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.postregister-card:hover .status-icon-wrapper {
+  transform: scale(1.05);
+}
+
+.status-icon-wrapper.success {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.status-icon-wrapper.info {
+  background: rgba(232, 160, 69, 0.06);
+  border-color: rgba(232, 160, 69, 0.3);
+  box-shadow: 0 0 30px rgba(232, 160, 69, 0.2);
+}
+
+.status-icon-wrapper.error {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+}
+
+.status-svg {
+  width: 38px;
+  height: 38px;
 }
 
 .postregister-badge {
-  display: inline-block;
-  background: rgba(232, 160, 69, 0.15);
-  border: 1px solid rgba(232, 160, 69, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 160, 69, 0.08);
+  border: 1px solid rgba(232, 160, 69, 0.25);
   color: #E8A045;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  padding: 4px 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 6px 16px;
   border-radius: 9999px;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
 .postregister-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #E8A045;
-  margin-bottom: 12px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: 0;
+  margin-bottom: 8px;
 }
 
 .postregister-subtitle {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
+  letter-spacing: 2.5px;
+  background: linear-gradient(135deg, #E8A045 0%, #ffbe82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: 0;
+  margin-bottom: 30px;
 }
 
 .postregister-text {
   font-size: 15px;
-  color: #9ca3af;
+  color: #a0aec0;
   line-height: 1.6;
-  margin-bottom: 30px;
+  max-width: 480px;
+  margin: 0 auto 32px auto;
 }
 
 .enroll-btn-sharp {
-  background: #E8A045;
+  background: linear-gradient(135deg, #E8A045 0%, #d4883b 100%);
   color: #120e1c;
   border: none;
-  border-radius: 0;
-  padding: 14px 28px;
-  font-family: "Courier New", Courier, monospace, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 2px;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1.5px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(252, 174, 105, 0.25);
-  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(232, 160, 69, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .enroll-btn-sharp:hover {
-  background: #ffbe82;
+  background: linear-gradient(135deg, #f0b057 0%, #e8a045 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(252, 174, 105, 0.4);
+  box-shadow: 0 8px 25px rgba(232, 160, 69, 0.5);
+}
+
+.enroll-btn-sharp svg {
+  transition: transform 0.2s ease;
+}
+
+.enroll-btn-sharp:hover svg {
+  transform: translateX(3px);
 }

@@ -1,15 +1,15 @@
 .leaderboard-searchfield-container {
   display: flex;
-  justify-content: center;
-  margin: 10px auto;
+  width: 100%;
+  margin: 0;
 }
 
 .leaderboard-searchfield {
   -webkit-appearance: none;
   border: var(--border-gold);
   outline: none;
-  padding: 8px 20px;
-  width: 280px;
+  padding: 8px 16px;
+  width: 100%;
   line-height: 24px;
   color: var(--text-primary);
   background: var(--bg-glass-card);
@@ -17,8 +17,8 @@
   -webkit-backdrop-filter: var(--backdrop-blur-sm);
   border-radius: 8px;
   font-family: inherit;
-  font-size: 15px;
-  transition: all 0.3s ease;
+  font-size: 14px;
+  transition: all 0.25s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -29,6 +29,6 @@
 .leaderboard-searchfield:focus,
 .leaderboard-searchfield:hover {
   border: var(--border-gold-hover);
-  box-shadow: 0 0 12px rgba(246, 179, 106, 0.25);
+  box-shadow: 0 0 12px rgba(246, 179, 106, 0.2);
   background: rgba(15, 23, 42, 0.6);
 }
