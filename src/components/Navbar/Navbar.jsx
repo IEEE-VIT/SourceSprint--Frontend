@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./navbar.styles.css";
 
 
 const Navbar = () => {
   const history = useHistory();
+  const [menuOpen, setMenuOpen] = useState(false);
   const scrollTo = (id) => {
     if (window.location.pathname !== "/") {
       history.push("/");
@@ -23,11 +24,23 @@ const Navbar = () => {
   const handleRegister = () => {
     history.push("/register");
   };
+
+  const handleMobileNav = (action) => {
+    setMenuOpen(false);
+    action();
+  };
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${menuOpen ? "menu-open" : ""}`}>
       <div
         className="navbar-logo"
-        onClick={() => scrollTo("home")}
+        onClick={() => {
+          if (window.location.pathname !== "/") {
+            history.push("/");
+          } else {
+            setMenuOpen((open) => !open);
+          }
+        }}
       >
         SOURCESPRINT
       </div>
@@ -56,6 +69,30 @@ const Navbar = () => {
       >
         REGISTER
       </button>
+
+      {menuOpen && (
+        <div className="navbar-mobile-dropdown">
+          <button onClick={() => handleMobileNav(() => history.push("/leaderboard"))}>
+            Leaderboard
+          </button>
+
+          <button onClick={() => handleMobileNav(() => scrollTo("timeline"))}>
+            Schedule
+          </button>
+
+          <button onClick={() => handleMobileNav(() => history.push("/resources"))}>
+            Resources
+          </button>
+
+          <button onClick={() => handleMobileNav(() => scrollTo("faq"))}>
+            FAQ
+          </button>
+
+          <button onClick={() => handleMobileNav(handleRegister)}>
+            Register
+          </button>
+        </div>
+      )}
     </nav>
   );
 };

@@ -13,8 +13,9 @@ const ResourcesPage = () => {
 
   return (
     <div className="App" style={{ position: "relative" }}>
-      {/* Top-Left Corner Back to Home Button */}
-      <button 
+      {/* Top-Left Corner Back to Home Button (hidden on mobile, overlaps navbar) */}
+      <button
+        className="back-to-home-btn"
         onClick={() => history.push("/")}
         style={{
           position: "absolute",
