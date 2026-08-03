@@ -12,7 +12,7 @@ import LinkImage from "../LinkImage/LinkImage";
 
 const facebook_link = "https://www.facebook.com/share/1DRPSCxJye/";
 const instagram_link = "https://www.instagram.com/ieeevitvellore/";
-const github_link = "https://github.com";
+const github_link = "https://github.com/IEEE-VIT";
 const twitter_link = "https://x.com/ieeevitvellore";
 const linkedin_link = "https://www.linkedin.com/company/ieee-vit-vellore/posts/?feedView=all";
 
