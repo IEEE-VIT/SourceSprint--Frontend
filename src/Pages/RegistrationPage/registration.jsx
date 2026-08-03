@@ -52,6 +52,8 @@ export default function RegistrationPage() {
     axios.post(`${backendUrl}/register/new`, {
       name: formData.name,
       email: formData.email,
+      github: formData.github,
+      regno: formData.regno,
       phone: '0000000000', // Default fallback as backend schema requires a phone number
       vit: 'yes' // Default fallback to satisfy backend schema enum requirement
     })
