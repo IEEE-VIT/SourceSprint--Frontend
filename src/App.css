@@ -73,3 +73,9 @@ img {
   display: none !important;
 }
 
+@media (max-width: 600px) {
+  .back-to-home-btn {
+    display: none !important;
+  }
+}
+
