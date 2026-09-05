@@ -1,106 +1,178 @@
-# 🚀 SourceSprint — Frontend
+# SourceSprint — Frontend
 
-SourceSprint is a high-intensity, collaborative open-source event frontend where users can learn Git, master GitHub, and make their first contributions in a gamified, real-time environment. 
+[![React](https://img.shields.io/badge/React-17.0.2-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-r158-black?style=flat-square&logo=three.js&logoColor=white)](https://threejs.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-16%2B-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-E8A045?style=flat-square)](https://github.com/thetan-dev/SourceSprint--Frontend/pulls)
 
-This repository contains the interactive client-side application built with React, TailwindCSS, and Three.js.
+SourceSprint is a high-intensity, collaborative open-source platform designed to help developers learn Git, master modern open-source workflows, and make their first contributions in a gamified, real-time environment.
 
----
-
-## ✨ Features
-
-- **🌌 Interactive 3D Starfield**: A premium, interactive 3D particle background using `@react-three/fiber` and `@react-three/drei` that responds to mouse movements.
-- **📝 Live Registration**: Seamless registration form at `/register` with client-side validation (e.g., matching student emails and GitHub usernames).
-- **⏱️ Live Timer**: High-precision countdown component keeping track of the event launch.
-- **🏆 Gamified Leaderboard**: View active participants, scores, and real-time project statistics.
-- **📚 Resources Hub**: Curated materials and instructions to guide new contributors.
-- **📱 Fully Responsive**: Optimized for desktop, tablet, and mobile screens.
+This repository hosts the client-side single-page application built with React, Tailwind CSS, and Three.js.
 
 ---
 
-## 🛠️ Tech Stack
+## Table of Contents
 
-- **Framework**: [React](https://reactjs.org/) (v17)
-- **Styling**: [TailwindCSS](https://tailwindcss.com/) & Vanilla CSS
-- **3D Graphics**: [Three.js](https://threejs.org/) via React Three Fiber (R3F) & Drei
-- **Routing**: [React Router](https://v5.reactrouter.com/) (v5)
-- **HTTP Client**: [Axios](https://axios-http.com/)
-- **Icons**: Font Awesome
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Local Development](#local-development)
+  - [Environment Configuration](#environment-configuration)
+- [Available Scripts](#available-scripts)
+- [Project Architecture](#project-architecture)
+- [Contribution Workflow](#contribution-workflow)
 
 ---
 
-## 🚀 Getting Started
+## Overview
 
-### 📋 Prerequisites
+The SourceSprint frontend provides an immersive experience for event participants:
+- Dynamic 3D visual environments that respond to user mouse physics.
+- Live validation for participant registration and GitHub verification.
+- Interactive documentation and cheatsheets for mastering Git CLI commands.
+- Live scoreboards and event countdown scheduling.
 
-Ensure you have [Node.js](https://nodejs.org/) installed:
-- Recommended Node version: `v16` or newer (successfully running on `v24` with legacy flags)
+---
 
-### ⚙️ Installation
+## Key Features
 
-Clone the repository and install dependencies. Because some packages have older peer dependency trees, run the install with the `--legacy-peer-deps` flag:
+- **Interactive 3D Galaxy Canvas**: Real-time particle field powered by `@react-three/fiber` and `@react-three/drei` providing dynamic cursor-following depth.
+- **Participant Registration**: Dedicated registration workflow at `/register` with validation rules for student identifiers and GitHub handles.
+- **Precision Countdown Timer**: Synchronized event countdown tracking launch milestones.
+- **Git Developer Resources Hub**: Interactive command hub at `/resources` featuring copyable commands, environment setup notes, and verified CLI guides.
+- **Gamified Leaderboard**: Live ranking system tracking contributor activities and project statistics.
+- **Responsive Glassmorphism UI**: Bespoke dark aesthetic with golden-amber accents, optimized across mobile, tablet, and widescreen displays.
 
-```bash
-# Clone the repository
-git clone https://github.com/thetan-dev/SourceSprint--Frontend.git
-cd SourceSprint--Frontend
+---
 
-# Install all packages
-npm install --legacy-peer-deps
-```
+## Technology Stack
 
-### 💻 Running the App Locally
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **UI Framework** | React 17.0.2 | Component architecture and state management |
+| **3D Graphics** | Three.js / React Three Fiber / Drei | Interactive canvas and particle systems |
+| **Styling** | Tailwind CSS & Custom CSS3 | Modern glassmorphic dark design system |
+| **Routing** | React Router v5 | Client-side routing and route-level protection |
+| **Networking** | Axios | REST API communication with backend services |
+| **Icons & Assets** | Custom SVG Design System & Font Awesome | Scalable vector iconography |
 
-Start the local development server:
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js**: `v16.x` or higher (compatible with `v18`, `v20`, and `v22` using legacy provider flags)
+- **Package Manager**: `npm` (bundled with Node.js) or `yarn`
+- **Git**: Installed and configured on your system
+
+### Installation
+
+1. Clone the repository to your local environment:
+   ```bash
+   git clone https://github.com/thetan-dev/SourceSprint--Frontend.git
+   cd SourceSprint--Frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+   > **Note**: The `--legacy-peer-deps` flag ensures smooth resolution with React 17 and Three.js peer dependency trees.
+
+### Local Development
+
+Start the development server with hot-reload enabled:
 
 ```bash
 npm run dev
 ```
 
-The application will run at **[http://localhost:3000](http://localhost:3000)**.
-
----
-
-## 📦 Scripts Available
-
-In the project directory, you can run:
-
-| Command | Action |
-| :--- | :--- |
-| `npm run dev` / `npm start` | Runs the app in development mode with hot-reloading. |
-| `npm run build` | Builds the production-ready static assets in the `build` folder. |
-| `npm run test` | Launches the test runner. |
-| `npm run eject` | Ejects the Create React App configuration. |
-
----
-
-## 📂 Project Structure
-
+The application will be accessible at:
 ```text
-SourceSprint--Frontend/
-├── public/                 # Static public assets (HTML, Favicon, manifest)
-├── src/
-│   ├── assets/             # SVGs, images, static datasets, and logos
-│   ├── components/         # Reusable UI components (Timer, Navbar, Footer, etc.)
-│   ├── Pages/              # Page views
-│   │   ├── HomePage/       # Event home layout
-│   │   ├── EnrollPage/     # Status pages for enrollment actions
-│   │   └── RegistrationPage/# Registration form and particle canvas
-│   ├── App.js              # Application entry point and router switch
-│   ├── index.js            # React renderer
-│   ├── index.css           # Global stylesheet and Tailwind directives
-│   └── tailwind.config.js  # Tailwind CSS configuration setup
-├── package.json            # Manifest file for scripts and dependencies
-└── package-lock.json       # Strict dependency tree lockfile
+http://localhost:3000
+```
+
+### Environment Configuration
+
+Create a `.env` file in the root directory if you need to point to a custom backend or mock API:
+
+```env
+REACT_APP_API_URL=https://api.sourcesprint.dev
 ```
 
 ---
 
-## 🤝 Contributing
+## Available Scripts
 
-We welcome contributions! Feel free to open issues or submit pull requests to help improve the SourceSprint experience. 
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the development server at `http://localhost:3000` |
+| `npm start` | Alias for `npm run dev` with legacy OpenSSL support enabled |
+| `npm run build` | Compiles an optimized, production-ready bundle into the `build/` directory |
+| `npm test` | Launches the interactive test runner |
+| `npm run eject` | Ejects Create React App configuration (one-way operation) |
 
-1. Fork the Repository.
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+---
+
+## Project Architecture
+
+```text
+SourceSprint--Frontend/
+├── public/                 # Static assets, HTML shell, and manifest
+│   ├── favicon.ico
+│   └── index.html
+├── src/
+│   ├── assets/             # Vector icons, branding assets, and static illustrations
+│   ├── components/         # Reusable presentation and layout components
+│   │   ├── Home/           # Hero section and 3D galaxy canvas
+│   │   ├── Navbar/         # Main navigation headers
+│   │   ├── Resources/      # Git commands reference and CLI setup guides
+│   │   ├── Timer/          # Event countdown components
+│   │   └── Footer/         # Social links, chapter information, and credits
+│   ├── Pages/              # Primary route views
+│   │   ├── HomePage/       # Landing page view
+│   │   ├── RegistrationPage/# Registration form view
+│   │   ├── ResourcesPage/  # Developer resources hub view
+│   │   └── LeaderboardPage/# Live leaderboard and metrics
+│   ├── App.js              # Application root and route definitions
+│   ├── index.js            # React DOM mounting entry point
+│   ├── index.css           # Global stylesheets and design tokens
+│   └── tailwind.config.js  # Tailwind CSS theme configuration
+├── package.json            # Project dependencies and operational scripts
+└── package-lock.json       # Deterministic dependency lockfile
+```
+
+---
+
+## Contribution Workflow
+
+We welcome contributions from the community. To contribute:
+
+1. **Fork** the repository on GitHub.
+2. **Clone** your fork locally:
+   ```bash
+   git clone https://github.com/<your-username>/SourceSprint--Frontend.git
+   cd SourceSprint--Frontend
+   ```
+3. **Create a branch** for your feature or bugfix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make your changes** and test locally:
+   ```bash
+   npm run dev
+   ```
+5. **Commit your work** with clear, descriptive messages:
+   ```bash
+   git commit -m "feat: implement responsive filter for resources hub"
+   ```
+6. **Push** the branch to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+7. **Open a Pull Request** against the `main` branch with a clear description of your changes.
