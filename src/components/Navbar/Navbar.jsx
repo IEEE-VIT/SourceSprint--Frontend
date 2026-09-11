@@ -46,6 +46,10 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-links">
+        <button onClick={() => history.push("/repos")}>
+          Repos
+        </button>
+
         <button onClick={() => history.push("/leaderboard")}>
           Leaderboard
         </button>
@@ -72,6 +76,10 @@ const Navbar = () => {
 
       {menuOpen && (
         <div className="navbar-mobile-dropdown">
+          <button onClick={() => handleMobileNav(() => history.push("/repos"))}>
+            Repos
+          </button>
+
           <button onClick={() => handleMobileNav(() => history.push("/leaderboard"))}>
             Leaderboard
           </button>

@@ -10,6 +10,7 @@ import GalaxyBackground from "./components/Home/GalaxyBackground";
 import RegistrationPage from "./Pages/RegistrationPage/registration";
 import ResourcesPage from "./Pages/ResourcesPage/ResourcesPage";
 import LeaderboardPage from "./Pages/LeaderboardPage/LeaderboardPage";
+import ReposPage from "./Pages/ReposPage/ReposPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/resources" component={ResourcesPage} />
         <Route exact path="/leaderboard" component={LeaderboardPage} />
+        <Route exact path="/repos" component={ReposPage} />
         <Route exact path="/enrolled/successful" component={EnrollPage} />
         <Route exact path="/enrolled/existing" component={EnrollPage1} />
         <Route exact path="/enrolled/idnotfound" component={EnrollPage2} />
