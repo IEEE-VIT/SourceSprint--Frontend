@@ -1,25 +1,25 @@
 {
-  "short_name": "CodeSprint",
-  "name": "CodeSprint - event page for IEEE's FOSSFiesta",
+  "short_name": "SourceSprint",
+  "name": "SourceSprint - IEEE-VIT open-source contribution event",
   "icons": [
     {
       "src": "favicon.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "svg"
+      "type": "image/svg+xml"
     },
     {
       "src": "logo192.svg",
-      "type": "svg",
+      "type": "image/svg+xml",
       "sizes": "192x192"
     },
     {
       "src": "logo512.svg",
-      "type": "svg",
+      "type": "image/svg+xml",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#B04814",
-  "background_color": "#2b3531"
+  "theme_color": "#E8A045",
+  "background_color": "#0d0a17"
 }

@@ -273,6 +273,18 @@
   color: #ffffff;
 }
 
+.repo-card-actions {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.repo-card-link-primary {
+  color: #f6b36a;
+  font-weight: 700;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .repos-container {

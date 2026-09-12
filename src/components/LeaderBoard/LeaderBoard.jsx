@@ -5,7 +5,7 @@ import { SearchBox } from "../SearchBox/SearchBox";
 import "./leaderboard.css";
 import PLACEHOLDER_LEADERBOARD from "./placeholderData";
 
-const LeaderBoard_link = `${process.env.REACT_APP_BACKEND_URL}/leaderboard`;
+const LeaderBoard_link = `${process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"}/leaderboard`;
 
 const LeaderBoard = () => {
   const [cards, setCards] = useState(PLACEHOLDER_LEADERBOARD);

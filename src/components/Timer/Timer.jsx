@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from "react";
 import "./timer.css";
 
+// Real event start: Monday, 14 September 2026, 09:00 IST (+05:30).
+// Change this one line if the start time moves. Once this moment passes the
+// countdown hides itself (the event is live).
+const EVENT_START = new Date("2026-09-14T09:00:00+05:30").getTime();
+
+const getRemaining = () => {
+  const difference = EVENT_START - Date.now();
+  if (difference <= 0) return null; // event has started -> hide the timer
+  return {
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((difference % (1000 * 60)) / 1000),
+  };
+};
+
 const Timer = () => {
-  // Target event countdown state
-  const [timeLeft, setTimeLeft] = useState({
-    days: 14,
-    hours: 8,
-    minutes: 42,
-    seconds: 18,
-  });
+  const [timeLeft, setTimeLeft] = useState(getRemaining);
 
   useEffect(() => {
-    const targetDate = new Date().getTime() + 14 * 24 * 60 * 60 * 1000 + 8 * 3600 * 1000 + 42 * 60 * 1000;
-
     const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference <= 0) {
-        clearInterval(interval);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((difference % (1000 * 60)) / 1000);
-        setTimeLeft({ days: d, hours: h, minutes: m, seconds: s });
-      }
+      const remaining = getRemaining();
+      setTimeLeft(remaining);
+      if (!remaining) clearInterval(interval);
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
+
+  // Event is live (or over): don't render the countdown at all.
+  if (!timeLeft) return null;
 
   const formatNumber = (num) => String(num).padStart(2, "0");
 

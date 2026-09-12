@@ -1,32 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import RepoCard from "./RepoCard";
-import IssuesModal from "./IssuesModal";
 import { SearchBox } from "../SearchBox/SearchBox";
 import PLACEHOLDER_REPOS from "./placeholderRepos";
 import "./repos.css";
 
-const DIFFICULTY_FILTERS = ["All", "Easy", "Medium", "Hard"];
+const REPOS_LINK = `${process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"}/repos`;
 
 const RepoList = () => {
-  const [repos] = useState(PLACEHOLDER_REPOS);
+  // Start with placeholder data so the page never looks empty; replace it with
+  // the live list from GET /repos as soon as it arrives (same graceful-fallback
+  // pattern as the leaderboard).
+  const [repos, setRepos] = useState(PLACEHOLDER_REPOS);
   const [searchField, setSearchField] = useState("");
-  const [selectedRepo, setSelectedRepo] = useState(null);
-  const [difficultyFilter, setDifficultyFilter] = useState("All");
+
+  useEffect(() => {
+    axios
+      .get(REPOS_LINK)
+      .then((response) => {
+        if (Array.isArray(response.data) && response.data.length > 0) {
+          setRepos(response.data);
+        }
+      })
+      .catch((error) => {
+        console.warn("Failed to fetch live repos, using local data", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setSearchField(e.target.value);
   };
 
-  const filteredRepos = repos
-    .filter((repo) => repo.name.toLowerCase().includes(searchField.toLowerCase()))
-    .filter((repo) => difficultyFilter === "All" || repo.difficulty === difficultyFilter);
+  const filteredRepos = repos.filter((repo) =>
+    `${repo.name} ${repo.owner}`.toLowerCase().includes(searchField.toLowerCase())
+  );
 
   return (
     <div className="repos-container" id="repos">
       <div className="repos-header-section">
         <h1 className="repos-title">REPOSITORIES</h1>
         <p className="repos-subtitle">
-          Pick a repo, find an issue tagged Easy, Medium, or Hard, and submit your PR.
+          Pick a repo, open its <strong>SourceSprint '26</strong> issues, and submit
+          a PR that closes one (e.g. <code>Closes #12</code>) to earn points.
         </p>
       </div>
 
@@ -43,37 +58,18 @@ const RepoList = () => {
         </div>
       </div>
 
-      <div className="repos-difficulty-filters">
-        {DIFFICULTY_FILTERS.map((level) => (
-          <button
-            key={level}
-            className={`difficulty-filter-pill ${
-              difficultyFilter === level ? "active" : ""
-            } ${level !== "All" ? `pill-${level.toLowerCase()}` : ""}`}
-            onClick={() => setDifficultyFilter(level)}
-          >
-            {level}
-          </button>
-        ))}
-      </div>
-
       <div className="repos-grid">
         {filteredRepos.length > 0 ? (
           filteredRepos.map((repo) => (
-            <RepoCard key={repo.id} repo={repo} onSelect={setSelectedRepo} />
+            <RepoCard key={`${repo.owner}/${repo.name}`} repo={repo} />
           ))
         ) : (
           <div className="repos-no-results">
             No repositories found
             {searchField && <> matching "{searchField}"</>}
-            {difficultyFilter !== "All" && <> for difficulty "{difficultyFilter}"</>}
           </div>
         )}
       </div>
-
-      {selectedRepo && (
-        <IssuesModal repo={selectedRepo} onClose={() => setSelectedRepo(null)} />
-      )}
     </div>
   );
 };

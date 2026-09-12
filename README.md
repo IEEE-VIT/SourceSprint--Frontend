@@ -99,11 +99,23 @@ http://localhost:3000
 
 ### Environment Configuration
 
-Create a `.env` file in the root directory if you need to point to a custom backend or mock API:
+The app talks to the backend through a single environment variable. Copy the
+provided sample and set it:
+
+```bash
+cp .env.sample .env
+```
 
 ```env
-REACT_APP_API_URL=https://api.sourcesprint.dev
+# .env  — base URL of the SourceSprint backend (no trailing slash)
+REACT_APP_BACKEND_URL=http://localhost:5000
 ```
+
+Notes:
+- The variable **must** be named `REACT_APP_BACKEND_URL` (Create React App only
+  exposes `REACT_APP_*` vars).
+- CRA reads env vars at **build time**, so rebuild/redeploy after changing it.
+- If it is unset, the code falls back to `http://localhost:5000` for local dev.
 
 ---
 

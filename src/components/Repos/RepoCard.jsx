@@ -1,50 +1,44 @@
 import React from "react";
 
-const DIFFICULTY_CLASS = {
-  Easy: "difficulty-easy",
-  Medium: "difficulty-medium",
-  Hard: "difficulty-hard",
-};
+// The common label every event issue carries. Change here if the label changes.
+const EVENT_LABEL = "SourceSprint '26";
 
-const RepoCard = ({ repo, onSelect }) => {
-  const { name, owner, url, description, difficulty, issueCounts } = repo;
-  const difficultyClass = DIFFICULTY_CLASS[difficulty] || "difficulty-medium";
+// Deep-link into a repo's open issues filtered by the event label, so a
+// participant lands directly on the issues they can pick up.
+const issuesLink = (repoUrl) =>
+  `${repoUrl}/issues?q=` +
+  encodeURIComponent(`is:issue is:open label:"${EVENT_LABEL}"`);
+
+const RepoCard = ({ repo }) => {
+  const { name, owner, url, description } = repo;
 
   return (
-    <div
-      className="repo-card"
-      onClick={() => onSelect(repo)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") onSelect(repo);
-      }}
-    >
+    <div className="repo-card">
       <div className="repo-card-header">
         <h3 className="repo-card-name">{name}</h3>
-        <span className={`repo-difficulty-badge ${difficultyClass}`}>
-          {difficulty}
-        </span>
       </div>
 
       <p className="repo-card-owner">{owner}</p>
       <p className="repo-card-description">{description}</p>
 
-      <div className="repo-card-tags">
-        <span className="repo-tag tag-easy">Easy: {issueCounts.easy}</span>
-        <span className="repo-tag tag-medium">Medium: {issueCounts.medium}</span>
-        <span className="repo-tag tag-hard">Hard: {issueCounts.hard}</span>
+      <div className="repo-card-actions">
+        <a
+          href={issuesLink(url)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="repo-card-link repo-card-link-primary"
+        >
+          Browse {EVENT_LABEL} issues →
+        </a>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="repo-card-link"
+        >
+          View on GitHub →
+        </a>
       </div>
-
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="repo-card-link"
-        onClick={(e) => e.stopPropagation()}
-      >
-        View on GitHub →
-      </a>
     </div>
   );
 };

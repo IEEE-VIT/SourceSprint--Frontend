@@ -1,43 +1,38 @@
-// Placeholder data for the Repos page.
-// The backend team will replace this with live data fetched from the API
-// (see LeaderBoard.jsx for the existing fetch + graceful-fallback pattern).
+// Fallback data for the Repos page, shown only if the backend can't be reached.
+// Shape MUST match what the backend's GET /repos returns: { owner, name, url, description }.
+// Repo difficulty and issue counts are intentionally NOT here — the backend keeps
+// repo difficulty hidden from participants and does not serve issue lists.
+// The live list comes from GET /repos (see RepoList.jsx); edit data/repos.json
+// on the backend to change the real event repos.
 
 const PLACEHOLDER_REPOS = [
   {
-    id: "repo-1",
+    owner: "sourcesprint-org",
     name: "sourcesprint-core",
-    owner: "sourcesprint-org",
     url: "https://github.com/sourcesprint-org/sourcesprint-core",
-    description: "The core engine powering SourceSprint's event scoring and issue tracking.",
-    difficulty: "Medium",
-    issueCounts: { easy: 4, medium: 6, hard: 2 },
+    description:
+      "The core engine powering SourceSprint's event scoring and issue tracking.",
   },
   {
-    id: "repo-2",
+    owner: "sourcesprint-org",
     name: "git-cheatsheet-cli",
-    owner: "sourcesprint-org",
     url: "https://github.com/sourcesprint-org/git-cheatsheet-cli",
-    description: "A command-line reference tool for learning essential Git workflows.",
-    difficulty: "Easy",
-    issueCounts: { easy: 8, medium: 3, hard: 0 },
+    description:
+      "A command-line reference tool for learning essential Git workflows.",
   },
   {
-    id: "repo-3",
+    owner: "sourcesprint-org",
     name: "galaxy-render-engine",
-    owner: "sourcesprint-org",
     url: "https://github.com/sourcesprint-org/galaxy-render-engine",
-    description: "Three.js-based particle rendering engine used across SourceSprint visuals.",
-    difficulty: "Hard",
-    issueCounts: { easy: 1, medium: 4, hard: 5 },
+    description:
+      "Three.js-based particle rendering engine used across SourceSprint visuals.",
   },
   {
-    id: "repo-4",
-    name: "contributor-dashboard",
     owner: "sourcesprint-org",
+    name: "contributor-dashboard",
     url: "https://github.com/sourcesprint-org/contributor-dashboard",
-    description: "Dashboard for participants to track their merged PRs and points.",
-    difficulty: "Medium",
-    issueCounts: { easy: 3, medium: 5, hard: 1 },
+    description:
+      "Dashboard for participants to track their merged PRs and points.",
   },
 ];
 
