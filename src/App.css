@@ -73,6 +73,70 @@ img {
   display: none !important;
 }
 
+/* Shared loading / error / empty state panel (repos + leaderboard) */
+.ss-state-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 260px;
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--bg-glass-card);
+  border: var(--border-gold);
+  border-radius: 16px;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+.ss-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(246, 179, 106, 0.2);
+  border-top-color: #f6b36a;
+  animation: ss-spin 0.8s linear infinite;
+}
+
+@keyframes ss-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ss-state-icon {
+  font-size: 34px;
+  line-height: 1;
+  color: #f6b36a;
+}
+
+.ss-state-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  max-width: 360px;
+  line-height: 1.55;
+}
+
+.ss-retry-btn {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #10131c;
+  background: linear-gradient(135deg, #f6b36a 0%, #e79a4d 100%);
+  border: none;
+  padding: 9px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ss-retry-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(246, 179, 106, 0.35);
+}
+
 @media (max-width: 600px) {
   .back-to-home-btn {
     display: none !important;

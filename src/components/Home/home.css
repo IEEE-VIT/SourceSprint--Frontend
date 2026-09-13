@@ -69,9 +69,64 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   width: 100%;
+}
+
+/* Step number badge inside the two action buttons */
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+/* Step 2 wrapper: button + helper hint stacked underneath */
+.link-step {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.secondary-btn-sharp.is-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.secondary-btn-sharp.is-locked:hover {
+  background: transparent;
+  transform: none;
+}
+
+.link-step-hint {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--text-muted, #94a3b8);
+}
+
+.link-step-escape {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #E8A045;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-step-escape:hover {
+  color: #ffbe82;
 }
 
 .primary-btn-sharp {

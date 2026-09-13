@@ -13,61 +13,6 @@
   margin-bottom: 40px;
 }
 
-.leaderboard-live-badge-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.leaderboard-live-badge {
-  background: rgba(246, 179, 106, 0.1);
-  border: 1px solid rgba(246, 179, 106, 0.25);
-  color: #f6b36a;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.live-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #f6b36a;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #f6b36a;
-  animation: live-pulse 2s infinite;
-}
-
-@keyframes live-pulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.5;
-    box-shadow: 0 0 0 0 rgba(246, 179, 106, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    opacity: 1;
-    box-shadow: 0 0 0 6px rgba(246, 179, 106, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.5;
-    box-shadow: 0 0 0 0 rgba(246, 179, 106, 0);
-  }
-}
-
-.leaderboard-last-updated {
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 500;
-}
-
 .leaderboard-title {
   font-size: 38px;
   font-weight: 800;

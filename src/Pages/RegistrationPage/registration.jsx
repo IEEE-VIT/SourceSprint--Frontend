@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { markRegistered } from '../../utils/session';
 import './registration.css';
 
 const validators = {
@@ -64,10 +65,14 @@ export default function RegistrationPage() {
       if (data.isNotParticipant === true || data.msg === 'User is not a participant') {
         setApiError('This email is not registered in our participant list. Please use the email you used to register for SourceSprint.');
       } else if (data.msg === 'User already exists') {
-        setApiError('You have already registered for SourceSprint! You can proceed to log in with GitHub.');
+        // Already registered — remember it so the home page unlocks the
+        // "Link your GitHub" step, and point them straight at that next step.
+        markRegistered();
+        setApiError('You’re already registered for SourceSprint! You can go ahead and link your GitHub account.');
       } else if (data.error) {
         setApiError('An error occurred. Please check your connection and try again.');
       } else {
+        markRegistered();
         setSubmitted(true);
       }
     })
@@ -279,7 +284,7 @@ export default function RegistrationPage() {
                           href={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000'}/github/login`}
                           className="error-action-link"
                         >
-                          Log in with GitHub →
+                          Link your GitHub →
                         </a>
                       )}
                     </div>
@@ -294,7 +299,7 @@ export default function RegistrationPage() {
                   </svg>
                 </div>
                 <h2>Registered!</h2>
-                <p>Thanks for registering for SourceSprint 🎉<br />You can now return home and log in with GitHub to start tracking your progress.</p>
+                <p>Thanks for registering for SourceSprint 🎉<br />You can now return home and link your GitHub account to start tracking your progress.</p>
                 <Link to="/" className="back-btn">Back to Home</Link>
               </div>
             )}

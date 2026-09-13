@@ -7,6 +7,29 @@
 //     Authorization: Bearer <token>
 
 const TOKEN_KEY = "ss_token";
+// Set once the user has registered on this browser (fresh registration OR the
+// backend reporting they already exist). Gates the "Link your GitHub" step on
+// the home page — see components/Home/Home.jsx. This is guidance, not a hard
+// gate: it's per-browser and there's an "already registered?" escape hatch.
+const REGISTERED_KEY = "ss_registered";
+
+// Remember that this browser's user has registered (survives refresh + the
+// GitHub OAuth redirect round-trip, since it's same-origin localStorage).
+export function markRegistered() {
+  try {
+    localStorage.setItem(REGISTERED_KEY, "true");
+  } catch (e) {
+    /* localStorage unavailable — non-fatal, the button just stays locked. */
+  }
+}
+
+export function isRegistered() {
+  try {
+    return localStorage.getItem(REGISTERED_KEY) === "true";
+  } catch (e) {
+    return false;
+  }
+}
 
 // Read ?token= from the current URL (if present), store it, and clean the URL.
 export function storeSessionToken() {
